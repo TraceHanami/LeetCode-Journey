@@ -5,3 +5,6 @@
     <img src="https://leetcard.jacoblin.cool/TraceHanami?theme=dark&font=unica&ext=contest" alt="LeetCode Stats"/>
   </a>
 </p>
+<p align="center">
+  <img src="https://leetcode.card.workers.dev/TraceHanami?theme=dark&font=baloo&extension=null" />
+</p>
