@@ -8,6 +8,11 @@ At each step you can come from one or two steps back — Fibonacci pattern.
 
 **[View on LeetCode](https://leetcode.com/problems/climbing-stairs/)**
 
+**Examples:**
+```
+n = 2 -> 2
+n = 3 -> 3
+```
 ---
 
 ## Approach 1 — Iterative DP ✅
