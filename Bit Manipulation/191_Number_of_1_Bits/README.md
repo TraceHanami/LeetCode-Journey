@@ -8,11 +8,27 @@ Count set bits in the binary representation of n.
 
 **[View on LeetCode](https://leetcode.com/problems/number-of-1-bits/)**
 
+**Examples:**
+```
+n = 11 -> 3
+n = 128 -> 1
+n = 2147483645 -> 30
+```
 ---
 
 ## Approach 1 — Bit mask loop ✅
 
 **Idea:** AND n with 1 to check last bit, right-shift n each iteration.
+
+```python
+class Solution1:
+    def hammingWeight(self, n: int) -> int:
+        count = 0
+        while n:
+            count += n & 1
+            n >>= 1
+        return count
+```
 
 **Complexity:**
 - Time: O(1)
@@ -24,6 +40,16 @@ Count set bits in the binary representation of n.
 
 **Idea:** n & (n-1) clears the lowest set bit. Count how many times until n=0.
 
+```python
+class Solution2:
+    def hammingWeight(self, n: int) -> int:
+        count = 0
+        while n:
+            n &= n - 1  # clears lowest set bit
+            count += 1
+        return count
+```
+
 **Complexity:**
 - Time: O(k)
 - Space: O(1)
@@ -33,6 +59,12 @@ Count set bits in the binary representation of n.
 ## Approach 3 — Built-in bin()
 
 **Idea:** bin(n).count('1')
+
+```python
+class Solution3:
+    def hammingWeight(self, n: int) -> int:
+        return bin(n).count('1')
+```
 
 **Complexity:**
 - Time: O(1)
