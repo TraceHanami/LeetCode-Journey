@@ -8,11 +8,23 @@ Each element becomes the sum of all elements up to and including itself.
 
 **[View on LeetCode](https://leetcode.com/problems/running-sum-of-1d-array/)**
 
+**Examples:**
+```
+nums = [1,2,3,4] -> [1,3,6,10] 
+nums = [1,1,1,1,1] -> [1,2,3,4,5]
 ---
 
 ## Approach 1 — In-place prefix sum ✅
 
 **Idea:** nums[i] += nums[i-1] for i in range(1, n).
+
+```python
+class Solution1:
+    def runningSum(self, nums: List[int]) -> List[int]:
+        for i in range(1, len(nums)):
+            nums[i] += nums[i - 1]
+        return nums
+```
 
 **Complexity:**
 - Time: O(n)
@@ -23,6 +35,13 @@ Each element becomes the sum of all elements up to and including itself.
 ## Approach 2 — itertools.accumulate
 
 **Idea:** list(itertools.accumulate(nums)).
+
+```python
+class Solution2:
+    def runningSum(self, nums: List[int]) -> List[int]:
+        import itertools
+        return list(itertools.accumulate(nums))
+```
 
 **Complexity:**
 - Time: O(n)
