@@ -8,11 +8,35 @@ Stack-based matching — push open brackets, pop and verify on close.
 
 **[View on LeetCode](https://leetcode.com/problems/valid-parentheses/)**
 
+**Exampples:**
+```
+s = "()" -> true
+s = "()[]{}" ->true
+s = "(]" -> false
+s = "([])" ->true
+s = "([)]" -> fasle
+```
+
 ---
 
 ## Approach 1 — Stack ✅
 
 **Idea:** Push open brackets. On close bracket, check top of stack matches. Stack must be empty at end.
+
+```python
+class Solution1:
+    def isValid(self, s: str) -> bool:
+        stack = []
+        pairs = {')': '(', '}': '{', ']': '['}
+        for char in s:
+            if char in pairs:
+                if not stack or stack[-1] != pairs[char]:
+                    return False
+                stack.pop()
+            else:
+                stack.append(char)
+        return len(stack) == 0
+```
 
 **Complexity:**
 - Time: O(n)
