@@ -9,6 +9,10 @@ Subtractive notation applies in 6 cases: `IV(4) IX(9) XL(40) XC(90) CD(400) CM(9
 
 **Constraints:** `1 <= s.length <= 15` · `s` contains only valid Roman numeral characters
 
+**Difficulty:** Easy | **Topic:** Hashtable / String
+
+**[View on LeetCode](https://leetcode.com/problems/roman-to-integer)**
+
 **Examples:**
 ```
 "III"   →  3
