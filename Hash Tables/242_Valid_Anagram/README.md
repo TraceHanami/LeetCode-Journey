@@ -8,11 +8,23 @@ Two strings are anagrams if they have identical character frequency counts.
 
 **[View on LeetCode](https://leetcode.com/problems/valid-anagram/)**
 
+**Exampples:**
+```
+ s = "anagram", t = "nagaram" -> true
+ s = "rat", t = "car" -> false
+```
 ---
 
 ## Approach 1 — Counter comparison ✅
 
 **Idea:** Count character frequencies with Counter or array of 26. Compare both counts.
+
+```python
+class Solution1:
+    def isAnagram(self, s: str, t: str) -> bool:
+        from collections import Counter
+        return Counter(s) == Counter(t)
+```
 
 **Complexity:**
 - Time: O(n)
@@ -24,6 +36,12 @@ Two strings are anagrams if they have identical character frequency counts.
 
 **Idea:** Sort both strings. Equal sorted strings = anagram.
 
+```python
+class Solution2:
+    def isAnagram(self, s: str, t: str) -> bool:
+        return sorted(s) == sorted(t)
+```
+ 
 **Complexity:**
 - Time: O(n log n)
 - Space: O(n)
