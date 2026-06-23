@@ -8,11 +8,28 @@ Two-pointer: overwrite elements equal to val with valid elements.
 
 **[View on LeetCode](https://leetcode.com/problems/remove-element/)**
 
+**Examples:**
+```
+nums = [3,2,2,3], val = 3 -> 2
+nums = [0,1,2,2,3,0,4,2], val = 2 -> 5
+```
+
 ---
 
 ## Approach 1 — Two pointers ✅
 
 **Idea:** Keep a write pointer; copy elements != val to front.
+
+```python
+class Solution1:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        write = 0
+        for num in nums:
+            if num != val:
+                nums[write] = num
+                write += 1
+        return write
+```
 
 **Complexity:**
 - Time: O(n)
@@ -23,6 +40,19 @@ Two-pointer: overwrite elements equal to val with valid elements.
 ## Approach 2 — Swap with end
 
 **Idea:** Swap val elements with end of array and shrink size.
+
+```python
+class Solution2:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        i, n = 0, len(nums)
+        while i < n:
+            if nums[i] == val:
+                nums[i] = nums[n - 1]
+                n -= 1
+            else:
+                i += 1
+        return n
+```
 
 **Complexity:**
 - Time: O(n)
