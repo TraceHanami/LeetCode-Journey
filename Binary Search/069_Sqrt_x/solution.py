@@ -27,3 +27,13 @@ class Solution2:
         while r * r > x:
             r = (r + x // r) // 2
         return r
+
+# ─────────────────────────────────────────────────
+# APPROACH 3: Build in
+# Time: O(1) | Space: O(1)
+# ─────────────────────────────────────────────────
+import math
+
+class Solution3:
+    def mySqrt(self, x: int) -> int:
+        return math.isqrt(x)
