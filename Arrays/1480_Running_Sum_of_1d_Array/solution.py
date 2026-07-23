@@ -1,20 +1,38 @@
-from typing import List
+from typing import *
 
 # ─────────────────────────────────────────────────
-# APPROACH 1: In-Place Prefix Sum (Recommended)
-# Time: O(n) | Space: O(1)
+# MY APPROACH 1: Accumulate in a Running Total
+# Why: Keep a running total and append it as you scan through the array once.
+# Time: O(n)
+# Space: O(n)
 # ─────────────────────────────────────────────────
 class Solution1:
     def runningSum(self, nums: List[int]) -> List[int]:
-        for i in range(1, len(nums)):
-            nums[i] += nums[i - 1]
-        return nums
+        result = []
+        total = 0
+        for n in nums:
+            total += n
+            result.append(total)
+        return result
+
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: itertools.accumulate
-# Time: O(n) | Space: O(n)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(n)
 # ─────────────────────────────────────────────────
-class Solution2:
+class Solution:
     def runningSum(self, nums: List[int]) -> List[int]:
-        import itertools
-        return list(itertools.accumulate(nums))
+        total = 0
+        result = []
+        for n in nums:
+            total += n
+            result.append(total)
+        return result
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

@@ -1,22 +1,34 @@
+from typing import *
+
 # ─────────────────────────────────────────────────
-# APPROACH 1: Strip and Split (Recommended)
-# Time: O(n) | Space: O(n)
+# MY APPROACH 1: Strip Trailing Spaces, Scan Backward
+# Why: Trim trailing whitespace, then count characters from the end until hitting a space.
+# Time: O(n)
+# Space: O(1) extra
 # ─────────────────────────────────────────────────
 class Solution1:
     def lengthOfLastWord(self, s: str) -> int:
-        return len(s.strip().split()[-1])
+        length = 0
+        s = s.rstrip()
+        for ch in reversed(s):
+            if ch == ' ':
+                break
+            length += 1
+        return length
+
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Reverse Scan
-# Time: O(n) | Space: O(1)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(n)
 # ─────────────────────────────────────────────────
-class Solution2:
+class Solution:
     def lengthOfLastWord(self, s: str) -> int:
-        count = 0
-        i = len(s) - 1
-        while i >= 0 and s[i] == ' ':
-            i -= 1
-        while i >= 0 and s[i] != ' ':
-            count += 1
-            i -= 1
-        return count
+        return len(s.split()[-1])
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

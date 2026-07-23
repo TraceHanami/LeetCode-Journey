@@ -1,29 +1,35 @@
-from typing import List
+from typing import *
 
 # ─────────────────────────────────────────────────
-# APPROACH 1: Two Pointers (Recommended)
-# Time: O(n) | Space: O(1)
+# MY APPROACH 1: Repeated .remove() Calls
+# Why: Quick to write using the built-in list method, though it shifts the whole list on every removal.
+# Time: O(n^2)
+# Space: O(1)
 # ─────────────────────────────────────────────────
 class Solution1:
     def removeElement(self, nums: List[int], val: int) -> int:
-        write = 0
-        for num in nums:
-            if num != val:
-                nums[write] = num
-                write += 1
-        return write
+        while val in nums:
+            nums.remove(val)
+        return len(nums)
+
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Swap with End
-# Time: O(n) | Space: O(1)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
-class Solution2:
+class Solution:
     def removeElement(self, nums: List[int], val: int) -> int:
-        i, n = 0, len(nums)
-        while i < n:
-            if nums[i] == val:
-                nums[i] = nums[n - 1]
-                n -= 1
-            else:
-                i += 1
-        return n
+        k = 0
+        for i in range(len(nums)):
+            if nums[i] != val:
+                nums[k] = nums[i]
+                k += 1
+        return k
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

@@ -1,53 +1,89 @@
 # 1672 — Richest Customer Wealth
 
 ## Problem
-
-Sum each customer's accounts; return the maximum sum.
+Given a grid where accounts[i][j] is the money customer i has in bank j, return the wealth of the richest customer.
 
 **Difficulty:** Easy | **Topic:** Arrays
-
 **[View on LeetCode](https://leetcode.com/problems/richest-customer-wealth/)**
 
 **Examples:**
+```text
+Input: accounts = [[1,2,3],[3,2,1]]
+Output: 6
 ```
-accounts = [[1,2,3],[3,2,1]] -> 6
-accounts = [[1,5],[7,3],[3,5]] -> 10
-```
+
 ---
 
-## Approach 1 — Row sum max ✅
-
-**Idea:** max(sum(row) for row in accounts).
+## My Approaches
+### Attempt 1 — Running List of Prefix Sums
+**Why I used it:**
+Accumulated sums per row into a flat list, then took the max — works but does more bookkeeping than necessary.
 
 ```python
-class Solution1:
-    def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        lo, hi = 0, len(numbers) - 1
-        while lo < hi:
-            s = numbers[lo] + numbers[hi]
-            if s == target:
-                return [lo + 1, hi + 1]
-            elif s < target:
-                lo += 1
-            else:
-                hi -= 1
+def maximumWealth(self, accounts: List[List[int]]) -> int:
+    sums = []
+    for row in accounts:
+        s = 0
+        for v in row:
+            s += v
+            sums.append(s)
+    return max(sums)
 ```
+
 **Complexity:**
-- Time: O(n*m)
-- Space: O(1)
+- Time: O(n * m)
+- Space: O(n * m)
+
+---
+### Attempt 2 — Sum Each Row, Take the Max ✅ Final Accepted Solution
+**Why I used it:**
+Only the final row total matters, so no need to store every partial sum.
+
+```python
+def maximumWealth(self, accounts: List[List[int]]) -> int:
+    return max(sum(row) for row in accounts)
+```
+
+**Complexity:**
+- Time: O(n * m)
+- Space: O(1) extra
 
 ---
 
+---
 
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+Sum each customer's row and keep the maximum — a direct generator expression over `sum()` and `max()` is both the clearest and most efficient way to express it.
+
+```python
+def maximumWealth(self, accounts: List[List[int]]) -> int:
+    return max(sum(row) for row in accounts)
+```
+
+### Complexity
+- Time: O(n * m)
+- Space: O(1) extra
+
+---
+
+---
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Row sum max | O(n*m) | O(1) | ✅ Yes |
+|-----------|--------|---------|-------------|
+| My Final Solution (Sum Each Row, Take the Max) | O(n * m) | O(1) extra | ✅ |
+| Standard Approach 1 | O(n * m) | O(1) extra | ✅ |
+| Running List of Prefix Sums | O(n * m) | O(n * m) | ❌ |
+
+
+---
+
+## Key Takeaway
+You only need each row's final total, not every partial sum along the way.
 
 ---
 
 ## Reference
-
-[LeetCode #1672 — Richest Customer Wealth](https://leetcode.com/problems/richest-customer-wealth/)
+- LeetCode #1672 — Richest Customer Wealth

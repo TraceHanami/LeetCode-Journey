@@ -1,31 +1,28 @@
-from typing import List
+from typing import *
 
 # ─────────────────────────────────────────────────
-# APPROACH 1: Set Intersection (Recommended)
-# Time: O(n+m) | Space: O(n)
+# MY APPROACH 1: Set Intersection
+# Why: Python's built-in set operations directly express the intersection semantics needed here.
+# Time: O(n + m)
+# Space: O(n + m)
 # ─────────────────────────────────────────────────
 class Solution1:
     def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
         return list(set(nums1) & set(nums2))
 
+
 # ─────────────────────────────────────────────────
-# APPROACH 2: Sort and Two Pointers
-# Time: O(n log n + m log m) | Space: O(1)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n + m)
+# Space: O(n + m)
 # ─────────────────────────────────────────────────
-class Solution2:
+class Solution:
     def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        nums1.sort()
-        nums2.sort()
-        result = []
-        i = j = 0
-        while i < len(nums1) and j < len(nums2):
-            if nums1[i] == nums2[j]:
-                if not result or result[-1] != nums1[i]:
-                    result.append(nums1[i])
-                i += 1
-                j += 1
-            elif nums1[i] < nums2[j]:
-                i += 1
-            else:
-                j += 1
-        return result
+        return list(set(nums1) & set(nums2))
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

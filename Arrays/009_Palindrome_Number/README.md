@@ -1,72 +1,99 @@
-# 9 — Palindrome Number
+# 009 — Palindrome Number
 
 ## Problem
-
-Reverse half the number and compare to the other half — no string conversion.
+Given an integer x, return true if x is a palindrome, and false otherwise, without converting it to a string (bonus challenge).
 
 **Difficulty:** Easy | **Topic:** Arrays
-
 **[View on LeetCode](https://leetcode.com/problems/palindrome-number/)**
 
 **Examples:**
-```
-x=121 -> true
-x=-121 ->false
-x=789 ->false
+```text
+Input: x = 121
+Output: true
+
+Input: x = -121
+Output: false
 ```
 
 ---
 
-## Approach 1 — Reverse half ✅
-
-**Idea:** Reverse digits of second half. Compare with first half. Handle negatives and trailing zeros.
+## My Approaches
+### Attempt 1 — Convert to String
+**Why I used it:**
+Simplest check — reverse the string form and compare.
 
 ```python
-class Solution1:
-    def isPalindrome(self, x: int) -> bool:
-        if x < 0 or (x != 0 and x % 10 == 0):
-            return False
-        reversed_half = 0
-        while x > reversed_half:
-            reversed_half = reversed_half * 10 + x % 10
-            x //= 10
-        return x == reversed_half or x == reversed_half // 10
+def isPalindrome(self, x: int) -> bool:
+    s = str(x)
+    return s == s[::-1]
 ```
 
 **Complexity:**
-- Time: O(log n)
+- Time: O(n)
+- Space: O(n)
+
+---
+### Attempt 2 — Reverse Half the Number ✅ Final Accepted Solution
+**Why I used it:**
+Avoids string conversion and stops halfway once the reversed part meets or passes the remaining part.
+
+```python
+def isPalindrome(self, x: int) -> bool:
+    if x < 0 or (x % 10 == 0 and x != 0):
+        return False
+    rev = 0
+    while x > rev:
+        rev = rev * 10 + x % 10
+        x //= 10
+    return x == rev or x == rev // 10
+```
+
+**Complexity:**
+- Time: O(log10 n)
 - Space: O(1)
 
 ---
 
-## Approach 2 — String conversion
+---
 
-**Idea:** str(x) == str(x)[::-1]. Simple but uses extra space.
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+Negative numbers and numbers ending in 0 (except 0 itself) can never be palindromes. Reverse only the second half of the digits and compare it against the first half — this avoids ever building a number larger than the input and sidesteps overflow concerns entirely.
 
 ```python
-class Solution2:
-    def isPalindrome(self, x: int) -> bool:
-        s = str(x)
-        return s == s[::-1]
+def isPalindrome(self, x: int) -> bool:
+    if x < 0 or (x % 10 == 0 and x != 0):
+        return False
+    rev = 0
+    while x > rev:
+        rev = rev * 10 + x % 10
+        x //= 10
+    return x == rev or x == rev // 10
 ```
 
-**Complexity:**
-- Time: O(log n)
-- Space: O(log n)
+### Complexity
+- Time: O(log10 n)
+- Space: O(1)
 
 ---
 
-
+---
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Reverse half | O(log n) | O(1) | ✅ Yes |
-| 2 — String conversion | O(log n) | O(log n) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (Reverse Half the Number) | O(log10 n) | O(1) | ✅ |
+| Standard Approach 1 | O(log10 n) | O(1) | ✅ |
+| Convert to String | O(n) | O(n) | ❌ |
+
+
+---
+
+## Key Takeaway
+Reversing only half the digits avoids doing extra work and never risks building a number bigger than necessary.
 
 ---
 
 ## Reference
-
-[LeetCode #9 — Palindrome Number](https://leetcode.com/problems/palindrome-number/)
+- LeetCode #9 — Palindrome Number

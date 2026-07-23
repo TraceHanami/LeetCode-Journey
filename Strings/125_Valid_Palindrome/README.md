@@ -1,18 +1,29 @@
 # 125 — Valid Palindrome
 
 ## Problem
-
-Keep only alphanumeric characters, compare to its reverse.
+Given a string, return true if it's a palindrome after converting to lowercase and removing all non-alphanumeric characters.
 
 **Difficulty:** Easy | **Topic:** Strings
-
 **[View on LeetCode](https://leetcode.com/problems/valid-palindrome/)**
+
+**Examples:**
+```text
+Input: s = "A man, a plan, a canal: Panama"
+Output: true
+```
 
 ---
 
-## Approach 1 — Filter and reverse ✅
+## My Approaches
+### Attempt 1 — Filter and Compare Reversed ✅ Final Accepted Solution
+**Why I used it:**
+Build a cleaned lowercase-alphanumeric version of the string, then compare it to its reverse.
 
-**Idea:** Filter non-alphanumeric, lowercase, compare to [::-1].
+```python
+def isPalindrome(self, s: str) -> bool:
+    cleaned = "".join(ch.lower() for ch in s if ch.isalnum())
+    return cleaned == cleaned[::-1]
+```
 
 **Complexity:**
 - Time: O(n)
@@ -20,27 +31,49 @@ Keep only alphanumeric characters, compare to its reverse.
 
 ---
 
-## Approach 2 — Two pointers
+---
 
-**Idea:** Left/right skip non-alphanumeric, compare chars, move inward.
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+Filtering into a clean string and reversing it is simple and O(n). A more space-efficient version uses two pointers converging from both ends, skipping non-alphanumeric characters in place without building a new string.
 
-**Complexity:**
+```python
+def isPalindrome(self, s: str) -> bool:
+    left, right = 0, len(s) - 1
+    while left < right:
+        while left < right and not s[left].isalnum():
+            left += 1
+        while left < right and not s[right].isalnum():
+            right -= 1
+        if s[left].lower() != s[right].lower():
+            return False
+        left += 1
+        right -= 1
+    return True
+```
+
+### Complexity
 - Time: O(n)
-- Space: O(1)
+- Space: O(1) extra
 
 ---
 
-
+---
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Filter and reverse | O(n) | O(n) | ✅ Yes |
-| 2 — Two pointers | O(n) | O(1) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (Filter and Compare Reversed) | O(n) | O(n) | ✅ |
+| Standard Approach 1 | O(n) | O(1) extra | ✅ |
+
+
+---
+
+## Key Takeaway
+Building a cleaned copy is the readable approach; the two-pointer in-place scan gets the same O(n) time down to O(1) extra space.
 
 ---
 
 ## Reference
-
-[LeetCode #125 — Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
+- LeetCode #125 — Valid Palindrome

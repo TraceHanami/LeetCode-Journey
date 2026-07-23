@@ -1,38 +1,27 @@
-# 69 — Sqrt x
+# 069 — Sqrt(x)
 
 ## Problem
-
-Binary search on the answer space from 0 to x.
+Given a non-negative integer x, return the integer square root of x (round down).
 
 **Difficulty:** Easy | **Topic:** Binary Search
-
-**[View on LeetCode](https://leetcode.com/problems/sqrt-x/)**
+**[View on LeetCode](https://leetcode.com/problems/sqrtx/)**
 
 **Examples:**
-```
-x = 4 ->2
-x = 8 -> 2
+```text
+Input: x = 8
+Output: 2
 ```
 
 ---
 
-## Approach 1 — Binary search ✅
-
-**Idea:** Search for largest k where k*k <= x.
+## My Approaches
+### Attempt 1 — Built-in isqrt ✅ Final Accepted Solution
+**Why I used it:**
+Python's math.isqrt computes the integer square root directly and efficiently.
 
 ```python
-class Solution1:
-    def mySqrt(self, x: int) -> int:
-        lo, hi = 0, x
-        while lo <= hi:
-            mid = (lo + hi) // 2
-            if mid * mid == x:
-                return mid
-            elif mid * mid < x:
-                lo = mid + 1
-            else:
-                hi = mid - 1
-        return hi
+def mySqrt(self, x: int) -> int:
+    return isqrt(x)
 ```
 
 **Complexity:**
@@ -41,57 +30,50 @@ class Solution1:
 
 ---
 
-## Approach 2 — Newton's method
+---
 
-**Idea:** x1 = (x0 + n/x0)/2 converges fast to sqrt.
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+Binary search over the candidate answer range [0, x]: for each midpoint, check if mid*mid <= x. The largest mid satisfying that is the floor square root — this is what math.isqrt effectively does under the hood.
 
 ```python
-class Solution2:
-    def mySqrt(self, x: int) -> int:
-        if x < 2:
-            return x
-        r = x
-        while r * r > x:
-            r = (r + x // r) // 2
-        return r
+def mySqrt(self, x: int) -> int:
+    if x < 2:
+        return x
+    left, right = 1, x // 2
+    ans = 1
+    while left <= right:
+        mid = (left + right) // 2
+        if mid * mid <= x:
+            ans = mid
+            left = mid + 1
+        else:
+            right = mid - 1
+    return ans
 ```
 
-**Complexity:**
+### Complexity
 - Time: O(log x)
 - Space: O(1)
 
 ---
 
-## Approach 3 — Built-in
-
-**Idea:** int(math.sqrt(x)) — not recommended in interviews.
-
-```python
-import math
-
-class Solution3:
-    def mySqrt(self, x: int) -> int:
-        return math.isqrt(x)
-```
-
-**Complexity:**
-- Time: O(1)
-- Space: O(1)
-
 ---
-
-
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Binary search | O(log x) | O(1) | ✅ Yes |
-| 2 — Newton's method | O(log x) | O(1) | No |
-| 3 — Built-in | O(1) | O(1) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (Built-in isqrt) | O(log x) | O(1) | ✅ |
+| Standard Approach 1 | O(log x) | O(1) | ✅ |
+
+
+---
+
+## Key Takeaway
+Integer square root is a monotonic-predicate binary search problem — 'is mid*mid <= x' is exactly the kind of predicate binary search is built for.
 
 ---
 
 ## Reference
-
-[LeetCode #69 — Sqrt x](https://leetcode.com/problems/sqrt-x/)
+- LeetCode #69 — Sqrt(x)

@@ -1,36 +1,50 @@
 # 283 — Move Zeroes
 
 ## Problem
-
-Two pointers: keep a write pointer for non-zero elements, fill rest with zeros.
+Given an array, move all 0's to the end while maintaining the relative order of the non-zero elements, in-place.
 
 **Difficulty:** Easy | **Topic:** Arrays
-
 **[View on LeetCode](https://leetcode.com/problems/move-zeroes/)**
 
 **Examples:**
-```
-nums = [0,1,0,3,12] -> [1,3,12,0,0]
-nums = [0] ->[0]
+```text
+Input: nums = [0,1,0,3,12]
+Output: [1,3,12,0,0]
 ```
 
 ---
 
-## Approach 1 — Two pointers ✅
-
-**Idea:** Write pointer advances only on non-zero. After loop, fill rest with 0.
+## My Approaches
+### Attempt 1 — Swap Every Non-Zero Forward
+**Why I used it:**
+First pass — always swap, even when i == l, which does redundant self-swaps but is still correct.
 
 ```python
-class Solution1:
-    def moveZeroes(self, nums: List[int]) -> None:
-        write = 0
-        for num in nums:
-            if num != 0:
-                nums[write] = num
-                write += 1
-        while write < len(nums):
-            nums[write] = 0
-            write += 1
+def moveZeroes(self, nums: List[int]) -> None:
+    l = 0
+    for i in range(len(nums)):
+        if nums[i] != 0:
+            nums[l], nums[i] = nums[i], nums[l]
+            l += 1
+```
+
+**Complexity:**
+- Time: O(n)
+- Space: O(1)
+
+---
+### Attempt 2 — Swap Only When Needed ✅ Final Accepted Solution
+**Why I used it:**
+Skip the swap when i == l to avoid pointless self-swaps — a small but meaningful cleanup.
+
+```python
+def moveZeroes(self, nums: List[int]) -> None:
+    l = 0
+    for i in range(len(nums)):
+        if nums[i] != 0:
+            if i != l:
+                nums[l], nums[i] = nums[i], nums[l]
+            l += 1
 ```
 
 **Complexity:**
@@ -39,37 +53,44 @@ class Solution1:
 
 ---
 
-## Approach 2 — Partition
+---
 
-**Idea:** Swap non-zero with write pointer position.
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+Use a slow pointer marking where the next non-zero value should go. Scan with a fast pointer; whenever a non-zero is found, swap it into the slow pointer's position and advance both. This naturally pushes all zeros to the end while preserving order.
 
 ```python
-class Solution2:
-    def moveZeroes(self, nums: List[int]) -> None:
-        write = 0
-        for i in range(len(nums)):
-            if nums[i] != 0:
-                nums[write], nums[i] = nums[i], nums[write]
-                write += 1
+def moveZeroes(self, nums: List[int]) -> None:
+    slow = 0
+    for fast in range(len(nums)):
+        if nums[fast] != 0:
+            nums[slow], nums[fast] = nums[fast], nums[slow]
+            slow += 1
 ```
 
-**Complexity:**
+### Complexity
 - Time: O(n)
 - Space: O(1)
 
 ---
 
-
+---
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Two pointers | O(n) | O(1) | ✅ Yes |
-| 2 — Partition | O(n) | O(1) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (Swap Only When Needed) | O(n) | O(1) | ✅ |
+| Standard Approach 1 | O(n) | O(1) | ✅ |
+| Swap Every Non-Zero Forward | O(n) | O(1) | ❌ |
+
+
+---
+
+## Key Takeaway
+Skipping the self-swap when the pointers coincide is a nice micro-optimization, though both versions are O(n) in the same single pass.
 
 ---
 
 ## Reference
-
-[LeetCode #283 — Move Zeroes](https://leetcode.com/problems/move-zeroes/)
+- LeetCode #283 — Move Zeroes

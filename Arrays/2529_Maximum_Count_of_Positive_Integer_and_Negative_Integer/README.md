@@ -1,32 +1,33 @@
 # 2529 — Maximum Count of Positive Integer and Negative Integer
 
 ## Problem
-
-Count negatives and positives separately (zeros excluded); return the larger count.
+Given a sorted array of integers, return the larger of the count of positive numbers and the count of negative numbers.
 
 **Difficulty:** Easy | **Topic:** Arrays
-
 **[View on LeetCode](https://leetcode.com/problems/maximum-count-of-positive-integer-and-negative-integer/)**
 
 **Examples:**
-```
-nums = [-2,-1,-1,1,2,3] -> 3
-nums = [-3,-2,-1,0,0,1,2] -> 3
-nums = [5,20,66,1314] -> 4
+```text
+Input: nums = [-2,-1,-1,1,2,3]
+Output: 3
 ```
 
 ---
 
-## Approach 1 — Linear scan ✅
-
-**Idea:** Count neg (< 0) and pos (> 0). Return max of both.
+## My Approaches
+### Attempt 1 — Linear Count ✅ Final Accepted Solution
+**Why I used it:**
+Scan once, tallying positives and negatives separately, then compare.
 
 ```python
-class Solution1:
-    def maximumCount(self, nums: List[int]) -> int:
-        neg = sum(1 for x in nums if x < 0)
-        pos = sum(1 for x in nums if x > 0)
-        return max(neg, pos)
+def maximumCount(self, nums: List[int]) -> int:
+    pos, neg = 0, 0
+    for n in nums:
+        if n > 0:
+            pos += 1
+        elif n < 0:
+            neg += 1
+    return max(pos, neg)
 ```
 
 **Complexity:**
@@ -35,36 +36,41 @@ class Solution1:
 
 ---
 
-## Approach 2 — Binary search
+---
 
-**Idea:** Use bisect to find boundary of negatives and positives.
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+Since the array is sorted, binary search (bisect) can locate the boundaries between negatives, zeros, and positives in O(log n), but a simple linear scan is just as fine given the constraints and much simpler to write.
 
 ```python
-class Solution2:
-    def maximumCount(self, nums: List[int]) -> int:
-        import bisect
-        neg = bisect.bisect_left(nums, 0)
-        pos = len(nums) - bisect.bisect_right(nums, 0)
-        return max(neg, pos)
+def maximumCount(self, nums: List[int]) -> int:
+    pos = sum(1 for n in nums if n > 0)
+    neg = sum(1 for n in nums if n < 0)
+    return max(pos, neg)
 ```
 
-**Complexity:**
-- Time: O(log n)
+### Complexity
+- Time: O(n)
 - Space: O(1)
 
 ---
 
-
+---
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Linear scan | O(n) | O(1) | ✅ Yes |
-| 2 — Binary search | O(log n) | O(1) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (Linear Count) | O(n) | O(1) | ✅ |
+| Standard Approach 1 | O(n) | O(1) | ✅ |
+
+
+---
+
+## Key Takeaway
+Sortedness would allow an O(log n) binary-search solution via bisect, but for this problem's size a plain linear scan is simpler and fast enough.
 
 ---
 
 ## Reference
-
-[LeetCode #2529 — Maximum Count of Positive Integer and Negative Integer](https://leetcode.com/problems/maximum-count-of-positive-integer-and-negative-integer/)
+- LeetCode #2529 — Maximum Count of Positive Integer and Negative Integer

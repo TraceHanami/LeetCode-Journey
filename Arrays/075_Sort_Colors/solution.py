@@ -1,30 +1,37 @@
-from typing import List
+from typing import *
 
 # ─────────────────────────────────────────────────
-# APPROACH 1: Dutch National Flag (Recommended)
-# Time: O(n) | Space: O(1)
+# MY APPROACH 1: Built-in Sort
+# Why: Only three distinct values, so a general sort trivially produces the right order.
+# Time: O(n log n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
 class Solution1:
     def sortColors(self, nums: List[int]) -> None:
-        lo, mid, hi = 0, 0, len(nums) - 1
-        while mid <= hi:
+        nums.sort()
+
+
+# ─────────────────────────────────────────────────
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(1)
+# ─────────────────────────────────────────────────
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        low, mid, high = 0, 0, len(nums) - 1
+        while mid <= high:
             if nums[mid] == 0:
-                nums[lo], nums[mid] = nums[mid], nums[lo]
-                lo += 1
-                mid += 1
+                nums[low], nums[mid] = nums[mid], nums[low]
+                low += 1; mid += 1
             elif nums[mid] == 1:
                 mid += 1
             else:
-                nums[mid], nums[hi] = nums[hi], nums[mid]
-                hi -= 1
+                nums[mid], nums[high] = nums[high], nums[mid]
+                high -= 1
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Count and Fill
-# Time: O(n) | Space: O(1)
+# TESTING
 # ─────────────────────────────────────────────────
-class Solution2:
-    def sortColors(self, nums: List[int]) -> None:
-        c0, c1, c2 = nums.count(0), nums.count(1), nums.count(2)
-        nums[:c0] = [0] * c0
-        nums[c0:c0+c1] = [1] * c1
-        nums[c0+c1:] = [2] * c2
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

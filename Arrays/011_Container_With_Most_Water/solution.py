@@ -1,30 +1,48 @@
-from typing import List
+from typing import *
 
 # ─────────────────────────────────────────────────
-# APPROACH 1: Two Pointers (Recommended)
-# Time: O(n) | Space: O(1)
+# MY APPROACH 1: Two Pointer (Optimal)
+# Why: The widest container is a good starting point; moving the shorter wall inward is the only move that can possibly increase area.
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
 class Solution1:
     def maxArea(self, height: List[int]) -> int:
-        lo, hi = 0, len(height) - 1
-        max_water = 0
-        while lo < hi:
-            water = min(height[lo], height[hi]) * (hi - lo)
-            max_water = max(max_water, water)
-            if height[lo] < height[hi]:
-                lo += 1
+        i = 0
+        j = len(height) - 1
+        m = 0
+        while i < j:
+            w = j - i
+            a = w * min(height[i], height[j])
+            m = max(m, a)
+            if height[i] < height[j]:
+                i += 1
             else:
-                hi -= 1
-        return max_water
+                j -= 1
+        return m
+
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Brute Force
-# Time: O(n²) | Space: O(1)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
-class Solution2:
+class Solution:
     def maxArea(self, height: List[int]) -> int:
-        max_water = 0
-        for i in range(len(height)):
-            for j in range(i + 1, len(height)):
-                max_water = max(max_water, min(height[i], height[j]) * (j - i))
-        return max_water
+        left, right = 0, len(height) - 1
+        best = 0
+        while left < right:
+            width = right - left
+            best = max(best, width * min(height[left], height[right]))
+            if height[left] < height[right]:
+                left += 1
+            else:
+                right -= 1
+        return best
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

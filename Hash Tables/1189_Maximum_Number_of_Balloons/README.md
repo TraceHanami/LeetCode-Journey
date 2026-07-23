@@ -1,113 +1,80 @@
 # 1189 — Maximum Number of Balloons
 
 ## Problem
+Given a string of lowercase letters, return the maximum number of times the word 'balloon' can be formed using its characters.
 
-Given a string `text`, return the maximum number of times the word `"balloon"` can be formed using the characters from `text`. Each character may be used only once.
-
-**Difficulty:** Easy | **Topic:** Hash Tables / Strings
-
+**Difficulty:** Easy | **Topic:** Hash Tables
 **[View on LeetCode](https://leetcode.com/problems/maximum-number-of-balloons/)**
 
 **Examples:**
-```
-text = "nlaebolko"      →  1
-text = "loonbalxballpoon"  →  2
-text = "leetcode"       →  0
-```
+```text
+Input: text = "nlaebolko"
+Output: 1
 
-**Key observation:** `"balloon"` = b×1, a×1, l×2, o×2, n×1. The letters `l` and `o` each appear **twice** per word.
+Input: text = "loonbalxballpoon"
+Output: 2
+```
 
 ---
 
-## Approach 1 — Counter with Min Frequency ✅
-
-**Idea:** Count all characters. The answer is the minimum of how many complete sets of each required character we have. Divide `l` and `o` counts by 2 since each word needs 2 of them.
-
-```python
-class Solution1:
-    def maxNumberOfBalloons(self, text: str) -> int:
-        from collections import Counter
-        freq = Counter(text)
-        return min(
-            freq['b'],
-            freq['a'],
-            freq['l'] // 2,
-            freq['o'] // 2,
-            freq['n'],
-        )
-```
-
-**Complexity:**
-- Time: O(n)
-- Space: O(1) — Counter has at most 26 keys
-
----
-
-## Approach 2 — Manual Count with Needed Map
-
-**Idea:** Define a `needed` dict mapping each character to how many times it appears in `"balloon"`. Count frequencies for only those characters, then divide each frequency by its requirement and return the minimum.
+## My Approaches
+### Attempt 1 — Frequency Count, Then Divide by Needed Count ✅ Final Accepted Solution
+**Why I used it:**
+Count only the letters that appear in 'balloon', then the answer is limited by whichever letter is scarcest relative to how many copies each 'balloon' needs.
 
 ```python
-class Solution2:
-    def maxNumberOfBalloons(self, text: str) -> int:
-        needed = {'b': 1, 'a': 1, 'l': 2, 'o': 2, 'n': 1}
-        freq = {}
-        for c in text:
-            if c in needed:
-                freq[c] = freq.get(c, 0) + 1
-
-        return min(freq.get(c, 0) // needed[c] for c in needed)
+def maxNumberOfBalloons(self, text: str) -> int:
+    freq = {}
+    for ch in text:
+        if ch in "balloon":
+            freq[ch] = freq.get(ch, 0) + 1
+    return min(freq.get("b", 0), freq.get("a", 0),
+               freq.get("l", 0) // 2, freq.get("o", 0) // 2,
+               freq.get("n", 0))
 ```
 
 **Complexity:**
 - Time: O(n)
 - Space: O(1)
 
-**Why it's useful:** More generalizable — swap `"balloon"` for any target word with no code changes beyond updating `needed`.
+---
 
 ---
 
-## Approach 3 — Binary Search on Answer
-
-**Idea:** Binary search on the number of words `k` we can form. For a given `k`, check whether each character's frequency in `text` is at least `k × frequency_in_word`. A nice pattern for "how many times can I form X" problems.
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+'balloon' needs 1 b, 1 a, 2 l's, 2 o's, and 1 n. Count the letters available in text, then the number of times the word can be formed is limited by the letter (after dividing by how many copies it needs) that runs out first.
 
 ```python
-class Solution3:
-    def maxNumberOfBalloons(self, text: str) -> int:
-        from collections import Counter
-
-        freq = Counter(text)
-        word_freq = Counter("balloon")
-
-        lo, hi = 0, len(text)
-        while lo < hi:
-            mid = (lo + hi + 1) // 2
-            if all(freq[c] >= word_freq[c] * mid for c in word_freq):
-                lo = mid
-            else:
-                hi = mid - 1
-
-        return lo
+def maxNumberOfBalloons(self, text: str) -> int:
+    from collections import Counter
+    count = Counter(text)
+    return min(count['b'], count['a'], count['l'] // 2,
+               count['o'] // 2, count['n'])
 ```
 
-**Complexity:**
-- Time: O(n log n)
+### Complexity
+- Time: O(n)
 - Space: O(1)
 
-**When to use:** Overkill here, but a powerful pattern when the feasibility check is expensive or the search space is large.
+---
 
 ---
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Counter Min | O(n) | O(1) | ✅ Yes |
-| 2 — Needed Map | O(n) | O(1) | No |
-| 3 — Binary Search | O(n log n) | O(1) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (Frequency Count, Then Divide by Needed Count) | O(n) | O(1) | ✅ |
+| Standard Approach 1 | O(n) | O(1) | ✅ |
+
+
+---
+
+## Key Takeaway
+Whenever a target word needs multiple copies of a letter, divide that letter's available count by how many copies are needed before taking the min across all letters.
 
 ---
 
 ## Reference
-
-[LeetCode #1189 — Maximum Number of Balloons](https://leetcode.com/problems/maximum-number-of-balloons/)
+- LeetCode #1189 — Maximum Number of Balloons

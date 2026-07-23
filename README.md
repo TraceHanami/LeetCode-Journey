@@ -1,130 +1,130 @@
-<div align="center">
-
 # LeetCode Journey
 
-**Systematic problem-solving practice in Python — patterns, complexity, and clean code.**
+A record of my LeetCode problem-solving, organized by topic. Each problem folder contains a `README.md` walking through my approaches (including earlier, less-optimal attempts) and a `solution.py` with runnable code.
 
-[![LeetCode](https://img.shields.io/badge/LeetCode-TraceHanami-FFA116?style=flat-square&logo=leetcode&logoColor=white)](https://leetcode.com/u/TraceHanami/)
-![Language](https://img.shields.io/badge/Language-Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Active-22c55e?style=flat-square)
+## Progress
 
-</div>
+**Total problems solved: 76**
 
----
+| Topic | Count |
+|-------|-------|
+| Arrays | 30 |
+| Backtracking | 1 |
+| Binary Search | 3 |
+| Bit Manipulation | 3 |
+| Dynamic Programming | 2 |
+| Greedy | 2 |
+| Hash Tables | 8 |
+| Linked Lists | 2 |
+| Math | 2 |
+| Simulation | 1 |
+| Sliding Window | 8 |
+| Sorting | 1 |
+| Stacks | 1 |
+| Strings | 12 |
 
-## Overview
+## Problems
 
-This repository tracks my structured approach to Data Structures & Algorithms through LeetCode. The focus is on building transferable intuition — not just getting problems to pass, but understanding *why* a solution works and what trade-offs it makes.
+### Arrays
+- [009 — Palindrome Number](Arrays/009_Palindrome_Number/README.md)
+- [011 — Container With Most Water](Arrays/011_Container_With_Most_Water/README.md)
+- [013 — Roman to Integer](Arrays/013_Roman_to_Integer/README.md)
+- [026 — Remove Duplicates from Sorted Array](Arrays/026_Remove_Duplicates_from_Sorted_Array/README.md)
+- [027 — Remove Element](Arrays/027_Remove_Element/README.md)
+- [066 — Plus One](Arrays/066_Plus_One/README.md)
+- [067 — Add Binary](Arrays/067_Add_Binary/README.md)
+- [075 — Sort Colors](Arrays/075_Sort_Colors/README.md)
+- [088 — Merge Sorted Array](Arrays/088_Merge_Sorted_Array/README.md)
+- [121 — Best Time to Buy and Sell Stock](Arrays/121_Best_Time_to_Buy_and_Sell_Stock/README.md)
+- [1295 — Find Numbers with Even Number of Digits](Arrays/1295_Find_Numbers_with_Even_Number_of_Digits/README.md)
+- [1344 — Angle Between Hands of a Clock](Arrays/1344_Angle_Between_Hands_of_a_Clock/README.md)
+- [1480 — Running Sum of 1d Array](Arrays/1480_Running_Sum_of_1d_Array/README.md)
+- [167 — Two Sum II - Input Array Is Sorted](Arrays/167_Two_Sum_II_Input_Array_Is_Sorted/README.md)
+- [1672 — Richest Customer Wealth](Arrays/1672_Richest_Customer_Wealth/README.md)
+- [169 — Majority Element](Arrays/169_Majority_Element/README.md)
+- [171 — Excel Sheet Column Number](Arrays/171_Excel_Sheet_Column_Number/README.md)
+- [1732 — Find the Highest Altitude](Arrays/1732_Find_the_Highest_Altitude/README.md)
+- [1840 — Maximum Building Height](Arrays/1840_Maximum_Building_Height/README.md)
+- [2529 — Maximum Count of Positive Integer and Negative Integer](Arrays/2529_Maximum_Count_of_Positive_Integer_and_Negative_Integer/README.md)
+- [258 — Add Digits](Arrays/258_Add_Digits/README.md)
+- [263 — Ugly Number](Arrays/263_Ugly_Number/README.md)
+- [268 — Missing Number](Arrays/268_Missing_Number/README.md)
+- [2798 — Number of Employees Who Met the Target](Arrays/2798_Number_of_Employees_Who_Met_the_Target/README.md)
+- [283 — Move Zeroes](Arrays/283_Move_Zeroes/README.md)
+- [414 — Third Maximum Number](Arrays/414_Third_Maximum_Number/README.md)
+- [485 — Max Consecutive Ones](Arrays/485_Max_Consecutive_Ones/README.md)
+- [509 — Fibonacci Number](Arrays/509_Fibonacci_Number/README.md)
+- [821 — Shortest Distance to a Character](Arrays/821_Shortest_Distance_to_a_Character/README.md)
+- [977 — Squares of a Sorted Array](Arrays/977_Squares_of_a_Sorted_Array/README.md)
 
-Every solution is documented with:
+### Backtracking
+- [980 — Unique Paths III](Backtracking/980_Unique_Paths_III/README.md)
 
-- **Intuition** — the reasoning behind the approach
-- **Implementation** — clean, readable Python code
-- **Complexity Analysis** — time and space trade-offs
-- **Alternatives** — other valid approaches when relevant
+### Binary Search
+- [035 — Search Insert Position](Binary Search/035_Search_Insert_Position/README.md)
+- [069 — Sqrt(x)](Binary Search/069_Sqrt_x/README.md)
+- [704 — Binary Search](Binary Search/704_Binary_Search/README.md)
 
----
+### Bit Manipulation
+- [136 — Single Number](Bit Manipulation/136_Single_Number/README.md)
+- [190 — Reverse Bits](Bit Manipulation/190_Reverse_Bits/README.md)
+- [191 — Number of 1 Bits](Bit Manipulation/191_Number_of_1_Bits/README.md)
 
-## Stats
+### Dynamic Programming
+- [070 — Climbing Stairs](Dynamic Programming/070_Climbing_Stairs/README.md)
+- [3699 — Number of ZigZag Arrays I](Dynamic Programming/3699_Number_of_ZigZag_Arrays_I/README.md)
 
-<div align="center">
+### Greedy
+- [1833 — Maximum Ice Cream Bars](Greedy/1833_Maximum_Ice_Cream_Bars/README.md)
+- [455 — Assign Cookies](Greedy/455_Assign_Cookies/README.md)
 
-<a href="https://leetcode.com/u/TraceHanami/">
-  <img src="https://leetcard.jacoblin.cool/TraceHanami?theme=dark&font=Nunito&ext=contest" alt="LeetCode Stats" />
-</a>
+### Hash Tables
+- [001 — Two Sum](Hash Tables/001_Two_Sum/README.md)
+- [1189 — Maximum Number of Balloons](Hash Tables/1189_Maximum_Number_of_Balloons/README.md)
+- [202 — Happy Number](Hash Tables/202_Happy_Number/README.md)
+- [205 — Isomorphic Strings](Hash Tables/205_Isomorphic_Strings/README.md)
+- [217 — Contains Duplicate](Hash Tables/217_Contains_Duplicate/README.md)
+- [242 — Valid Anagram](Hash Tables/242_Valid_Anagram/README.md)
+- [349 — Intersection of Two Arrays](Hash Tables/349_Intersection_of_Two_Arrays/README.md)
+- [389 — Find the Difference](Hash Tables/389_Find_the_Difference/README.md)
 
-<br /><br />
+### Linked Lists
+- [021 — Merge Two Sorted Lists](Linked Lists/021_Merge_Two_Sorted_Lists/README.md)
+- [083 — Remove Duplicates from Sorted List](Linked Lists/083_Remove_Duplicates_from_Sorted_List/README.md)
 
-<a href="https://leetcode.com/u/TraceHanami/">
-  <img src="https://leetcard.jacoblin.cool/TraceHanami?theme=dark&ext=heatmap" alt="Submission Heatmap" />
-</a>
+### Math
+- [1291 — Sequential Digits](Math/1291_Sequential_Digits/README.md)
+- [3754 — Concatenate Non-Zero Digits and Multiply by Sum I](Math/3754_Concatenate_Non_Zero_Digits_and_Multiply_by_Sum_I/README.md)
 
-</div>
+### Simulation
+- [1260 — Shift 2D Grid](Simulation/1260_Shift_2D_Grid/README.md)
 
----
+### Sliding Window
+- [1004 — Max Consecutive Ones III](Sliding Window/1004_Max_Consecutive_Ones_III/README.md)
+- [1358 — Number of Substrings Containing All Three Characters](Sliding Window/1358_Number_of_Substrings_Containing_All_Three_Characters/README.md)
+- [1446 — Consecutive Characters](Sliding Window/1446_Consecutive_Characters/README.md)
+- [2461 — Maximum Sum of Distinct Subarrays With Length K](Sliding Window/2461_Maximum_Sum_of_Distinct_Subarrays_With_Length_K/README.md)
+- [438 — Find All Anagrams in a String](Sliding Window/438_Find_All_Anagrams_in_a_String/README.md)
+- [567 — Permutation in String](Sliding Window/567_Permutation_in_String/README.md)
+- [643 — Maximum Average Subarray I](Sliding Window/643_Maximum_Average_Subarray_I/README.md)
+- [904 — Fruit Into Baskets](Sliding Window/904_Fruit_Into_Baskets/README.md)
 
-## Repository Structure
+### Sorting
+- [1331 — Rank Transform of an Array](Sorting/1331_Rank_Transform_of_an_Array/README.md)
 
-```
-LeetCode-Journey/
-│
-├── Arrays/
-├── Strings/
-├── Linked Lists/
-├── Trees/
-├── Graphs/
-├── Dynamic Programming/
-├── Binary Search/
-├── Sliding Window/
-├── Greedy/
-└── Backtracking/
-```
+### Stacks
+- [020 — Valid Parentheses](Stacks/020_Valid_Parentheses/README.md)
 
-Each problem lives in its own folder:
-
-```
-Problem_NNN_Problem_Name/
-├── solution.py
-└── README.md
-```
-
----
-
-## Solution Template
-
-Every `README.md` follows this format:
-
-```markdown
-# NNN — Problem Title
-
-## Intuition & Approach
-Why this approach works and how to arrive at it.
-
-## Implementation
-Clean Python solution with inline comments.
-
-## Complexity
-- Time:  O(?)
-- Space: O(?)
-
-## Alternatives
-Other valid approaches and their trade-offs.
-```
-
----
-
-## Topics Covered
-
-### Data Structures
-`Arrays` · `Strings` · `Hash Tables` · `Linked Lists` · `Stacks & Queues` · `Trees` · `Binary Search Trees` · `Heaps` · `Graphs`
-
-### Algorithms
-`Binary Search` · `Two Pointers` · `Sliding Window` · `Recursion` · `Backtracking` · `Greedy` · `Dynamic Programming` · `DFS & BFS` · `Bit Manipulation`
-
----
-
-## Roadmap
-
-| Stage | Topics | Status |
-|---|---|---|
-| **Foundation** | Arrays, Strings, Hashing, Sorting | 🔄 In Progress |
-| **Intermediate** | Linked Lists, Trees, Binary Search, Sliding Window | 🔄 In Progress |
-| **Advanced** | Dynamic Programming, Graphs, Union Find, Segment Trees | ⏳ Upcoming |
-
----
-
-## Goals
-
-- [ ] Solve problems consistently — minimum 5 per week
-- [ ] Reach 100+ solved problems
-- [ ] Participate in weekly contests regularly
-- [ ] Cover all major interview patterns
-- [ ] Document every solution before moving on
-
----
-
-<div align="center">
-
-*Consistency beats intensity. One problem at a time.*
-
-</div>
+### Strings
+- [014 — Longest Common Prefix](Strings/014_Longest_Common_Prefix/README.md)
+- [028 — Find the Index of the First Occurrence in a String](Strings/028_Find_the_Index_of_the_First_Occurrence_in_a_String/README.md)
+- [058 — Length of Last Word](Strings/058_Length_of_Last_Word/README.md)
+- [125 — Valid Palindrome](Strings/125_Valid_Palindrome/README.md)
+- [151 — Reverse Words in a String](Strings/151_Reverse_Words_in_a_String/README.md)
+- [1768 — Merge Strings Alternately](Strings/1768_Merge_Strings_Alternately/README.md)
+- [1967 — Number of Strings That Appear as Substrings in Word](Strings/1967_Number_of_Strings_That_Appear_as_Substrings_in_Word/README.md)
+- [2108 — Find First Palindromic String in the Array](Strings/2108_Find_First_Palindromic_String_in_the_Array/README.md)
+- [344 — Reverse String](Strings/344_Reverse_String/README.md)
+- [345 — Reverse Vowels of a String](Strings/345_Reverse_Vowels_of_a_String/README.md)
+- [3612 — Process String with Special Operations I](Strings/3612_Process_String_with_Special_Operations_I/README.md)
+- [3614 — Process String with Special Operations II](Strings/3614_Process_String_with_Special_Operations_II/README.md)

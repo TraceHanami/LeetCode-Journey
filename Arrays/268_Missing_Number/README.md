@@ -1,30 +1,30 @@
 # 268 — Missing Number
 
 ## Problem
-
-Expected sum minus actual sum gives the missing number.
+Given an array containing n distinct numbers from 0 to n, find the one number missing from the range.
 
 **Difficulty:** Easy | **Topic:** Arrays
-
 **[View on LeetCode](https://leetcode.com/problems/missing-number/)**
 
 **Examples:**
+```text
+Input: nums = [3,0,1]
+Output: 2
 ```
-nums = [3,0,1] -> 2
-nums = [0,1] -> 2
-nums = [9,6,4,2,3,5,7,0,1] -> 8
-```
+
 ---
 
-## Approach 1 — Gauss sum ✅
-
-**Idea:** Missing = n*(n+1)//2 - sum(nums).
+## My Approaches
+### Attempt 1 — XOR of Indices and Values ✅ Final Accepted Solution
+**Why I used it:**
+XORing every index and every value cancels out all present pairs, leaving only the missing number.
 
 ```python
-class Solution1:
-    def missingNumber(self, nums: List[int]) -> int:
-        n = len(nums)
-        return n * (n + 1) // 2 - sum(nums)
+def missingNumber(self, nums: List[int]) -> int:
+    missing = len(nums)
+    for i, n in enumerate(nums):
+        missing ^= i ^ n
+    return missing
 ```
 
 **Complexity:**
@@ -33,57 +33,42 @@ class Solution1:
 
 ---
 
-## Approach 2 — XOR
+---
 
-**Idea:** XOR all indices and values — duplicates cancel, leaving the missing number.
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+XOR every index 0..n and every value in nums together. Since XOR is its own inverse, each number that appears in both the index range and the array cancels itself out, leaving only the number that never got paired.
 
 ```python
-class Solution2:
-    def missingNumber(self, nums: List[int]) -> int:
-        result = len(nums)
-        for i, num in enumerate(nums):
-            result ^= i ^ num
-        return result
+def missingNumber(self, nums: List[int]) -> int:
+    missing = len(nums)
+    for i, n in enumerate(nums):
+        missing ^= i ^ n
+    return missing
 ```
 
-**Complexity:**
+### Complexity
 - Time: O(n)
 - Space: O(1)
 
 ---
 
-## Approach 3 — Sort
-
-**Idea:** Sort and check if nums[i] == i.
-
-```python
-class Solution3:
-    def missingNumber(self, nums: List[int]) -> int:
-        nums.sort()
-        for i, num in enumerate(nums):
-            if i != num:
-                return i
-        return len(nums)
-```
-
-**Complexity:**
-- Time: O(n log n)
-- Space: O(1)
-
 ---
-
-
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Gauss sum | O(n) | O(1) | ✅ Yes |
-| 2 — XOR | O(n) | O(1) | No |
-| 3 — Sort | O(n log n) | O(1) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (XOR of Indices and Values) | O(n) | O(1) | ✅ |
+| Standard Approach 1 | O(n) | O(1) | ✅ |
+
+
+---
+
+## Key Takeaway
+XOR cancellation avoids any risk of integer overflow that a sum-based Gauss's formula approach could have in other languages.
 
 ---
 
 ## Reference
-
-[LeetCode #268 — Missing Number](https://leetcode.com/problems/missing-number/)
+- LeetCode #268 — Missing Number

@@ -1,10 +1,25 @@
+from typing import *
+
 # ─────────────────────────────────────────────────
-# APPROACH 1: Base-26 Conversion (Recommended)
-# Time: O(n) | Space: O(1)
+# No personal attempt logged for this problem yet.
 # ─────────────────────────────────────────────────
-class Solution1:
+
+
+# ─────────────────────────────────────────────────
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(1)
+# ─────────────────────────────────────────────────
+class Solution:
     def titleToNumber(self, columnTitle: str) -> int:
         result = 0
-        for c in columnTitle:
-            result = result * 26 + (ord(c) - ord('A') + 1)
+        for ch in columnTitle:
+            result = result * 26 + (ord(ch) - ord('A') + 1)
         return result
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

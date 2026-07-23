@@ -1,32 +1,55 @@
-from typing import List
+from typing import *
 
 # ─────────────────────────────────────────────────
-# APPROACH 1: Boyer-Moore Voting (Recommended)
-# Time: O(n) | Space: O(1)
+# MY APPROACH 1: Frequency Map
+# Why: Count occurrences of every value, then check which one crosses the n/2 threshold.
+# Time: O(n)
+# Space: O(n)
 # ─────────────────────────────────────────────────
 class Solution1:
     def majorityElement(self, nums: List[int]) -> int:
-        candidate, count = None, 0
-        for num in nums:
-            if count == 0:
-                candidate = num
-            count += 1 if num == candidate else -1
-        return candidate
+        freq = {}
+        for n in nums:
+            freq[n] = freq.get(n, 0) + 1
+        for k, v in freq.items():
+            if v > len(nums) // 2:
+                return k
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Hash Map
-# Time: O(n) | Space: O(n)
+# MY APPROACH 2: Boyer-Moore Voting
+# Why: Since a true majority element is guaranteed to exist, votes for/against a candidate cancel out and the majority always survives.
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
 class Solution2:
     def majorityElement(self, nums: List[int]) -> int:
-        from collections import Counter
-        return Counter(nums).most_common(1)[0][0]
+        count = 0
+        candidate = None
+        for n in nums:
+            if count == 0:
+                candidate = n
+            count += 1 if n == candidate else -1
+        return candidate
+
 
 # ─────────────────────────────────────────────────
-# APPROACH 3: Sort
-# Time: O(n log n) | Space: O(1)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
-class Solution3:
+class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        nums.sort()
-        return nums[len(nums) // 2]
+        count = 0
+        candidate = None
+        for n in nums:
+            if count == 0:
+                candidate = n
+            count += 1 if n == candidate else -1
+        return candidate
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

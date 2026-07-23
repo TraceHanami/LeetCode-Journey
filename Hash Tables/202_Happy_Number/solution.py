@@ -1,31 +1,41 @@
+from typing import *
+
 # ─────────────────────────────────────────────────
-# APPROACH 1: Hash Set Cycle Detection (Recommended)
-# Time: O(log n) | Space: O(log n)
+# MY APPROACH 1: Cycle Detection with a Seen Set
+# Why: If a number repeats, the sequence is stuck in an infinite loop that will never reach 1 — track seen values to detect that.
+# Time: O(log n) per step, bounded overall
+# Space: O(k) for the seen set
 # ─────────────────────────────────────────────────
 class Solution1:
     def isHappy(self, n: int) -> bool:
-        def digit_square_sum(num):
-            return sum(int(d) ** 2 for d in str(num))
-
         seen = set()
-        while n != 1:
-            if n in seen:
-                return False
+        while n != 1 and n not in seen:
             seen.add(n)
-            n = digit_square_sum(n)
-        return True
+            total = 0
+            while n > 0:
+                d = n % 10
+                total += d ** 2
+                n //= 10
+            n = total
+        return n == 1
+
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Floyd's Cycle Detection
-# Time: O(log n) | Space: O(1)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(log n) per step
+# Space: O(k)
 # ─────────────────────────────────────────────────
-class Solution2:
+class Solution:
     def isHappy(self, n: int) -> bool:
-        def digit_square_sum(num):
-            return sum(int(d) ** 2 for d in str(num))
+        seen = set()
+        while n != 1 and n not in seen:
+            seen.add(n)
+            n = sum(int(d) ** 2 for d in str(n))
+        return n == 1
 
-        slow, fast = n, digit_square_sum(n)
-        while fast != 1 and slow != fast:
-            slow = digit_square_sum(slow)
-            fast = digit_square_sum(digit_square_sum(fast))
-        return fast == 1
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

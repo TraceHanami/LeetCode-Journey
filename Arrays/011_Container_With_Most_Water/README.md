@@ -1,37 +1,38 @@
-# 11 — Container With Most Water
+# 011 — Container With Most Water
 
 ## Problem
+Given n non-negative integers representing heights of vertical lines, find two lines that together with the x-axis form a container holding the most water.
 
-Greedy two-pointer: always move the shorter line inward to maximize area.
-
-**Difficulty:** Med | **Topic:** Arrays
-
+**Difficulty:** Medium | **Topic:** Arrays
 **[View on LeetCode](https://leetcode.com/problems/container-with-most-water/)**
 
 **Examples:**
+```text
+Input: height = [1,8,6,2,5,4,8,3,7]
+Output: 49
 ```
-height = [1,8,6,2,5,4,8,3,7] -> 49
-height = [1,1] -> 1
-```
+
 ---
 
-## Approach 1 — Two pointers ✅
-
-**Idea:** Start with widest container. Move pointer at shorter height inward. Track max area.
+## My Approaches
+### Attempt 1 — Two Pointer (Optimal) ✅ Final Accepted Solution
+**Why I used it:**
+The widest container is a good starting point; moving the shorter wall inward is the only move that can possibly increase area.
 
 ```python
-class Solution1:
-    def maxArea(self, height: List[int]) -> int:
-        lo, hi = 0, len(height) - 1
-        max_water = 0
-        while lo < hi:
-            water = min(height[lo], height[hi]) * (hi - lo)
-            max_water = max(max_water, water)
-            if height[lo] < height[hi]:
-                lo += 1
-            else:
-                hi -= 1
-        return max_water
+def maxArea(self, height: List[int]) -> int:
+    i = 0
+    j = len(height) - 1
+    m = 0
+    while i < j:
+        w = j - i
+        a = w * min(height[i], height[j])
+        m = max(m, a)
+        if height[i] < height[j]:
+            i += 1
+        else:
+            j -= 1
+    return m
 ```
 
 **Complexity:**
@@ -40,37 +41,67 @@ class Solution1:
 
 ---
 
-## Approach 2 — Brute force
+---
 
-**Idea:** Check all pairs. Too slow for large input.
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+Start with the widest possible container (both ends). At each step, area is limited by the shorter wall, so moving the taller wall inward can only shrink or keep the width down without any chance of a taller wall — always move the shorter side.
 
 ```python
-class Solution2:
-    def maxArea(self, height: List[int]) -> int:
-        max_water = 0
-        for i in range(len(height)):
-            for j in range(i + 1, len(height)):
-                max_water = max(max_water, min(height[i], height[j]) * (j - i))
-        return max_water
+def maxArea(self, height: List[int]) -> int:
+    left, right = 0, len(height) - 1
+    best = 0
+    while left < right:
+        width = right - left
+        best = max(best, width * min(height[left], height[right]))
+        if height[left] < height[right]:
+            left += 1
+        else:
+            right -= 1
+    return best
 ```
 
-**Complexity:**
-- Time: O(n²)
+### Complexity
+- Time: O(n)
+- Space: O(1)
+
+---
+### Standard Approach 2 — Alternative
+### Idea
+Brute force checks every pair of lines directly — useful as a baseline to see why the two-pointer trick is worth learning.
+
+```python
+def maxArea(self, height: List[int]) -> int:
+    best = 0
+    for i in range(len(height)):
+        for j in range(i + 1, len(height)):
+            best = max(best, (j - i) * min(height[i], height[j]))
+    return best
+```
+
+### Complexity
+- Time: O(n^2)
 - Space: O(1)
 
 ---
 
-
+---
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Two pointers | O(n) | O(1) | ✅ Yes |
-| 2 — Brute force | O(n²) | O(1) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (Two Pointer (Optimal)) | O(n) | O(1) | ✅ |
+| Standard Approach 1 | O(n) | O(1) | ✅ |
+| Standard Approach 2 | O(n^2) | O(1) | Optional |
+
+
+---
+
+## Key Takeaway
+Greedily moving the shorter wall inward is provably safe — it's the only move that could ever increase the area.
 
 ---
 
 ## Reference
-
-[LeetCode #11 — Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
+- LeetCode #11 — Container With Most Water

@@ -1,26 +1,39 @@
+from typing import *
+
 # ─────────────────────────────────────────────────
-# APPROACH 1: Filter and Reverse (Recommended)
-# Time: O(n) | Space: O(n)
+# MY APPROACH 1: Filter and Compare Reversed
+# Why: Build a cleaned lowercase-alphanumeric version of the string, then compare it to its reverse.
+# Time: O(n)
+# Space: O(n)
 # ─────────────────────────────────────────────────
 class Solution1:
     def isPalindrome(self, s: str) -> bool:
-        filtered = [c.lower() for c in s if c.isalnum()]
-        return filtered == filtered[::-1]
+        cleaned = "".join(ch.lower() for ch in s if ch.isalnum())
+        return cleaned == cleaned[::-1]
+
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Two Pointers
-# Time: O(n) | Space: O(1)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(1) extra
 # ─────────────────────────────────────────────────
-class Solution2:
+class Solution:
     def isPalindrome(self, s: str) -> bool:
-        lo, hi = 0, len(s) - 1
-        while lo < hi:
-            while lo < hi and not s[lo].isalnum():
-                lo += 1
-            while lo < hi and not s[hi].isalnum():
-                hi -= 1
-            if s[lo].lower() != s[hi].lower():
+        left, right = 0, len(s) - 1
+        while left < right:
+            while left < right and not s[left].isalnum():
+                left += 1
+            while left < right and not s[right].isalnum():
+                right -= 1
+            if s[left].lower() != s[right].lower():
                 return False
-            lo += 1
-            hi -= 1
+            left += 1
+            right -= 1
         return True
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

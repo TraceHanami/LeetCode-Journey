@@ -1,31 +1,33 @@
+from typing import *
+
 # ─────────────────────────────────────────────────
-# APPROACH 1: Bit Mask Loop (Recommended)
-# Time: O(1) | Space: O(1)
+# MY APPROACH 1: Count '1's in Binary String
+# Why: Convert to binary text and count the characters that equal '1'.
+# Time: O(32) = O(1)
+# Space: O(1)
 # ─────────────────────────────────────────────────
 class Solution1:
     def hammingWeight(self, n: int) -> int:
-        count = 0
-        while n:
-            count += n & 1
-            n >>= 1
-        return count
+        bits = bin(n)[2:]
+        return sum(1 for b in bits if b == '1')
+
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Brian Kernighan's Algorithm
-# Time: O(k) where k = number of set bits | Space: O(1)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(k) where k = number of set bits
+# Space: O(1)
 # ─────────────────────────────────────────────────
-class Solution2:
+class Solution:
     def hammingWeight(self, n: int) -> int:
         count = 0
         while n:
-            n &= n - 1  # clears lowest set bit
+            n &= n - 1
             count += 1
         return count
 
 # ─────────────────────────────────────────────────
-# APPROACH 3: Built-in bin()
-# Time: O(1) | Space: O(1)
+# TESTING
 # ─────────────────────────────────────────────────
-class Solution3:
-    def hammingWeight(self, n: int) -> int:
-        return bin(n).count('1')
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

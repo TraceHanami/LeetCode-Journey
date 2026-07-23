@@ -1,28 +1,39 @@
-from typing import List
+from typing import *
 
 # ─────────────────────────────────────────────────
-# APPROACH 1: Three Variables (Recommended)
-# Time: O(n) | Space: O(1)
+# MY APPROACH 1: Dedupe, Sort, Index
+# Why: Sorting a deduplicated set makes picking the third-largest a simple index lookup.
+# Time: O(n log n)
+# Space: O(n)
 # ─────────────────────────────────────────────────
 class Solution1:
     def thirdMax(self, nums: List[int]) -> int:
-        first = second = third = float('-inf')
-        for num in nums:
-            if num in (first, second, third):
-                continue
-            if num > first:
-                first, second, third = num, first, second
-            elif num > second:
-                second, third = num, second
-            elif num > third:
-                third = num
-        return third if third != float('-inf') else first
+        unique = sorted(set(nums))
+        if len(unique) >= 3:
+            return unique[-3]
+        return unique[-1]
+
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Sorted Set
-# Time: O(n log n) | Space: O(n)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
-class Solution2:
+class Solution:
     def thirdMax(self, nums: List[int]) -> int:
-        unique = sorted(set(nums), reverse=True)
-        return unique[2] if len(unique) >= 3 else unique[0]
+        first = second = third = None
+        for n in set(nums):
+            if first is None or n > first:
+                first, second, third = n, first, second
+            elif second is None or n > second:
+                second, third = n, second
+            elif third is None or n > third:
+                third = n
+        return third if third is not None else first
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

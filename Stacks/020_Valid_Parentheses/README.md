@@ -1,41 +1,38 @@
-# 20 — Valid Parentheses
+# 020 — Valid Parentheses
 
 ## Problem
-
-Stack-based matching — push open brackets, pop and verify on close.
+Given a string of brackets '()[]{}', determine if the input string is valid (every open bracket is closed by the same type in the correct order).
 
 **Difficulty:** Easy | **Topic:** Stacks
-
 **[View on LeetCode](https://leetcode.com/problems/valid-parentheses/)**
 
-**Exampples:**
-```
-s = "()" -> true
-s = "()[]{}" ->true
-s = "(]" -> false
-s = "([])" ->true
-s = "([)]" -> fasle
+**Examples:**
+```text
+Input: s = "()[]{}"
+Output: true
+
+Input: s = "(]"
+Output: false
 ```
 
 ---
 
-## Approach 1 — Stack ✅
-
-**Idea:** Push open brackets. On close bracket, check top of stack matches. Stack must be empty at end.
+## My Approaches
+### Attempt 1 — Stack of Expected Closers ✅ Final Accepted Solution
+**Why I used it:**
+Push the expected closing bracket whenever an opener is seen; any mismatch or leftover bracket at the end means invalid.
 
 ```python
-class Solution1:
-    def isValid(self, s: str) -> bool:
-        stack = []
-        pairs = {')': '(', '}': '{', ']': '['}
-        for char in s:
-            if char in pairs:
-                if not stack or stack[-1] != pairs[char]:
-                    return False
-                stack.pop()
-            else:
-                stack.append(char)
-        return len(stack) == 0
+def isValid(self, s: str) -> bool:
+    stack = []
+    pairs = {'(': ')', '[': ']', '{': '}'}
+    for ch in s:
+        if ch in pairs:
+            stack.append(pairs[ch])
+        else:
+            if not stack or stack.pop() != ch:
+                return False
+    return not stack
 ```
 
 **Complexity:**
@@ -44,16 +41,46 @@ class Solution1:
 
 ---
 
+---
 
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+A stack naturally models the nesting structure of brackets. Push the matching closer for every opening bracket seen; when a closing bracket appears, it must equal the top of the stack, otherwise the string is invalid. At the end, the stack must be empty.
+
+```python
+def isValid(self, s: str) -> bool:
+    stack = []
+    pairs = {'(': ')', '[': ']', '{': '}'}
+    for ch in s:
+        if ch in pairs:
+            stack.append(pairs[ch])
+        elif not stack or stack.pop() != ch:
+            return False
+    return not stack
+```
+
+### Complexity
+- Time: O(n)
+- Space: O(n)
+
+---
+
+---
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Stack | O(n) | O(n) | ✅ Yes |
+|-----------|--------|---------|-------------|
+| My Final Solution (Stack of Expected Closers) | O(n) | O(n) | ✅ |
+| Standard Approach 1 | O(n) | O(n) | ✅ |
+
+
+---
+
+## Key Takeaway
+Whenever a problem involves nested/matched structure, a stack is almost always the right data structure — pushing the *expected closer* rather than the opener simplifies the matching check.
 
 ---
 
 ## Reference
-
-[LeetCode #20 — Valid Parentheses](https://leetcode.com/problems/valid-parentheses/)
+- LeetCode #20 — Valid Parentheses

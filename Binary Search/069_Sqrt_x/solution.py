@@ -1,39 +1,39 @@
+from typing import *
+
 # ─────────────────────────────────────────────────
-# APPROACH 1: Binary Search (Recommended)
-# Time: O(log x) | Space: O(1)
+# MY APPROACH 1: Built-in isqrt
+# Why: Python's math.isqrt computes the integer square root directly and efficiently.
+# Time: O(log x)
+# Space: O(1)
 # ─────────────────────────────────────────────────
 class Solution1:
     def mySqrt(self, x: int) -> int:
-        lo, hi = 0, x
-        while lo <= hi:
-            mid = (lo + hi) // 2
-            if mid * mid == x:
-                return mid
-            elif mid * mid < x:
-                lo = mid + 1
-            else:
-                hi = mid - 1
-        return hi
+        return isqrt(x)
+
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Newton's Method
-# Time: O(log x) | Space: O(1)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(log x)
+# Space: O(1)
 # ─────────────────────────────────────────────────
-class Solution2:
+class Solution:
     def mySqrt(self, x: int) -> int:
         if x < 2:
             return x
-        r = x
-        while r * r > x:
-            r = (r + x // r) // 2
-        return r
+        left, right = 1, x // 2
+        ans = 1
+        while left <= right:
+            mid = (left + right) // 2
+            if mid * mid <= x:
+                ans = mid
+                left = mid + 1
+            else:
+                right = mid - 1
+        return ans
 
 # ─────────────────────────────────────────────────
-# APPROACH 3: Build in
-# Time: O(1) | Space: O(1)
+# TESTING
 # ─────────────────────────────────────────────────
-import math
-
-class Solution3:
-    def mySqrt(self, x: int) -> int:
-        return math.isqrt(x)
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

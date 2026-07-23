@@ -1,33 +1,34 @@
-from typing import List
+from typing import *
 
 # ─────────────────────────────────────────────────
-# APPROACH 1: Gauss Sum (Recommended)
-# Time: O(n) | Space: O(1)
+# MY APPROACH 1: XOR of Indices and Values
+# Why: XORing every index and every value cancels out all present pairs, leaving only the missing number.
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
 class Solution1:
     def missingNumber(self, nums: List[int]) -> int:
-        n = len(nums)
-        return n * (n + 1) // 2 - sum(nums)
+        missing = len(nums)
+        for i, n in enumerate(nums):
+            missing ^= i ^ n
+        return missing
+
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: XOR
-# Time: O(n) | Space: O(1)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
-class Solution2:
+class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-        result = len(nums)
-        for i, num in enumerate(nums):
-            result ^= i ^ num
-        return result
+        missing = len(nums)
+        for i, n in enumerate(nums):
+            missing ^= i ^ n
+        return missing
 
 # ─────────────────────────────────────────────────
-# APPROACH 3: Sort
-# Time: O(n log n) | Space: O(1)
+# TESTING
 # ─────────────────────────────────────────────────
-class Solution3:
-    def missingNumber(self, nums: List[int]) -> int:
-        nums.sort()
-        for i, num in enumerate(nums):
-            if i != num:
-                return i
-        return len(nums)
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

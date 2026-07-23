@@ -1,90 +1,111 @@
 # 821 — Shortest Distance to a Character
 
 ## Problem
+Given a string s and a character c that occurs in s, return an array where answer[i] is the distance from index i to the closest occurrence of c.
 
-Given a string `s` and a character `c`, return an array where each element represents the shortest distance from that index to any occurrence of `c`.
-
-**Difficulty:** Easy | **Topic:** Arrays
-
+**Difficulty:** Medium | **Topic:** Arrays
 **[View on LeetCode](https://leetcode.com/problems/shortest-distance-to-a-character/)**
 
 **Examples:**
 ```text
-s = "loveleetcode", c = "e" -> [3,2,1,0,1,0,0,1,2,2,1,0]
-s = "aaab", c = "b" -> [3,2,1,0]
+Input: s = "loveleetcode", c = "e"
+Output: [3,2,1,0,1,0,0,1,2,2,1,0]
 ```
 
 ---
 
-## Approach 1 — Store Character Positions
-
-**Idea:**  
-First collect all indices where `c` appears. Then, for each position in the string, compute the minimum distance to any stored index.
+## My Approaches
+### Attempt 1 — Brute Force — Compare Against Every Occurrence
+**Why I used it:**
+Collect all positions of c, then for each index find the closest one by scanning the whole list.
 
 ```python
-class Solution:
-    def shortestToChar(self, s: str, c: str) -> List[int]:
-        a = []
-        r = []
-        for i in range(len(s)):
-            if s[i] == c:
-                a.append(i)
-        for i in range(len(s)):
-            z = min(abs(i - x) for x in a)
-            r.append(z)
-        return r
+def shortestToChar(self, s: str, c: str) -> List[int]:
+    positions = [i for i in range(len(s)) if s[i] == c]
+    result = []
+    for i in range(len(s)):
+        result.append(min(abs(i - p) for p in positions))
+    return result
 ```
 
-### Complexity
-
-- Time: O(n × k)
-- Worst Case: O(n²)
-- Space: O(n)
+**Complexity:**
+- Time: O(n * k)
+- Space: O(k)
 
 ---
-
-## Approach 2 — Two-Pass Scan ✅
-
-**Idea:**  
-Scan from left to right to find the nearest occurrence on the left. Then scan from right to left to find the nearest occurrence on the right. Take the minimum of both distances.
+### Attempt 2 — Two-Pass Sweep (Optimal) ✅ Final Accepted Solution
+**Why I used it:**
+One left-to-right pass tracks distance since the last occurrence; one right-to-left pass tracks distance to the next occurrence — take the min of both.
 
 ```python
-class Solution:
-    def shortestToChar(self, s: str, c: str) -> List[int]:
-        n = len(s)
-        result = [n] * n
-
-        prev = float('-inf')
-        for i in range(n):
-            if s[i] == c:
-                prev = i
-            result[i] = i - prev
-
-        prev = float('inf')
-        for i in range(n - 1, -1, -1):
-            if s[i] == c:
-                prev = i
-            result[i] = min(result[i], prev - i)
-
-        return result
+def shortestToChar(self, s: str, c: str) -> List[int]:
+    n = len(s)
+    result = [0] * n
+    prev = float('-inf')
+    for i in range(n):
+        if s[i] == c:
+            prev = i
+        result[i] = i - prev
+    prev = float('inf')
+    for i in range(n - 1, -1, -1):
+        if s[i] == c:
+            prev = i
+        result[i] = min(result[i], prev - i)
+    return result
 ```
 
-### Complexity
-
+**Complexity:**
 - Time: O(n)
 - Space: O(n)
 
 ---
 
-## Comparison
+---
 
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+Two linear sweeps: left-to-right tracks the distance since the most recent occurrence of c; right-to-left tracks the distance to the next occurrence. Taking the minimum of both at each index gives the true shortest distance without ever comparing against every occurrence.
+
+```python
+def shortestToChar(self, s: str, c: str) -> List[int]:
+    n = len(s)
+    ans = [0] * n
+    last = float('-inf')
+    for i in range(n):
+        if s[i] == c:
+            last = i
+        ans[i] = i - last
+    last = float('inf')
+    for i in range(n - 1, -1, -1):
+        if s[i] == c:
+            last = i
+        ans[i] = min(ans[i], last - i)
+    return ans
+```
+
+### Complexity
+- Time: O(n)
+- Space: O(n)
+
+---
+
+---
+
+## Comparison
 | Approach | Time | Space | Recommended |
-|----------|------|--------|-------------|
-| Store Character Positions | O(n²) worst case | O(n) | For understanding |
-| Two-Pass Scan | O(n) | O(n) | ✅ Yes |
+|-----------|--------|---------|-------------|
+| My Final Solution (Two-Pass Sweep (Optimal)) | O(n) | O(n) | ✅ |
+| Standard Approach 1 | O(n) | O(n) | ✅ |
+| Brute Force — Compare Against Every Occurrence | O(n * k) | O(k) | ❌ |
+
+
+---
+
+## Key Takeaway
+Two direction-aware sweeps replace an O(n·k) brute-force comparison with a single pair of O(n) passes.
 
 ---
 
 ## Reference
-
-[LeetCode #821 — Shortest Distance to a Character](https://leetcode.com/problems/shortest-distance-to-a-character/)
+- LeetCode #821 — Shortest Distance to a Character

@@ -1,21 +1,32 @@
-from typing import List
+from typing import *
 
 # ─────────────────────────────────────────────────
-# APPROACH 1: Two Pointers In-Place (Recommended)
-# Time: O(n) | Space: O(1)
+# MY APPROACH 1: Built-in list.reverse()
+# Why: Python's list already has an in-place reverse method that does exactly what's required.
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
 class Solution1:
     def reverseString(self, s: List[str]) -> None:
-        lo, hi = 0, len(s) - 1
-        while lo < hi:
-            s[lo], s[hi] = s[hi], s[lo]
-            lo += 1
-            hi -= 1
+        s.reverse()
+
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Built-in Reverse
-# Time: O(n) | Space: O(1)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
-class Solution2:
+class Solution:
     def reverseString(self, s: List[str]) -> None:
-        s.reverse()
+        left, right = 0, len(s) - 1
+        while left < right:
+            s[left], s[right] = s[right], s[left]
+            left += 1
+            right -= 1
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

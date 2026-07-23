@@ -1,77 +1,68 @@
 # 349 — Intersection of Two Arrays
 
 ## Problem
-
-Convert one array to set, filter the other by membership.
+Given two integer arrays, return an array of their unique intersection (each element appears once).
 
 **Difficulty:** Easy | **Topic:** Hash Tables
-
 **[View on LeetCode](https://leetcode.com/problems/intersection-of-two-arrays/)**
 
 **Examples:**
+```text
+Input: nums1 = [1,2,2,1], nums2 = [2,2]
+Output: [2]
 ```
-nums1 = [1,2,2,1], nums2 = [2,2] -> [2]
-nums1 = [4,9,5], nums2 = [9,4,9,8,4] ->[9,4]
-```
+
 ---
 
-## Approach 1 — Set intersection ✅
-
-**Idea:** set(nums1) & set(nums2) directly gives unique intersection.
+## My Approaches
+### Attempt 1 — Set Intersection ✅ Final Accepted Solution
+**Why I used it:**
+Python's built-in set operations directly express the intersection semantics needed here.
 
 ```python
-class Solution1:
-    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        return list(set(nums1) & set(nums2))
+def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+    return list(set(nums1) & set(nums2))
 ```
 
 **Complexity:**
-- Time: O(n+m)
-- Space: O(n)
+- Time: O(n + m)
+- Space: O(n + m)
 
 ---
 
-## Approach 2 — Sort and two pointers
+---
 
-**Idea:** Sort both. Two pointers advance on mismatch, record match and advance both.
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+Converting both arrays to sets and intersecting them directly matches the problem's requirement of unique, order-independent output — no need for manual loops.
 
 ```python
-class Solution2:
-    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        nums1.sort()
-        nums2.sort()
-        result = []
-        i = j = 0
-        while i < len(nums1) and j < len(nums2):
-            if nums1[i] == nums2[j]:
-                if not result or result[-1] != nums1[i]:
-                    result.append(nums1[i])
-                i += 1
-                j += 1
-            elif nums1[i] < nums2[j]:
-                i += 1
-            else:
-                j += 1
-        return result
+def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+    return list(set(nums1) & set(nums2))
 ```
 
-**Complexity:**
-- Time: O(n log n)
-- Space: O(1)
+### Complexity
+- Time: O(n + m)
+- Space: O(n + m)
 
 ---
 
-
+---
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Set intersection | O(n+m) | O(n) | ✅ Yes |
-| 2 — Sort and two pointers | O(n log n) | O(1) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (Set Intersection) | O(n + m) | O(n + m) | ✅ |
+| Standard Approach 1 | O(n + m) | O(n + m) | ✅ |
+
+
+---
+
+## Key Takeaway
+When a problem explicitly wants a unique, unordered intersection, built-in set operations are both the simplest and most efficient tool.
 
 ---
 
 ## Reference
-
-[LeetCode #349 — Intersection of Two Arrays](https://leetcode.com/problems/intersection-of-two-arrays/)
+- LeetCode #349 — Intersection of Two Arrays

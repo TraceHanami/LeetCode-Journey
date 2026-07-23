@@ -1,64 +1,95 @@
 # 1295 — Find Numbers with Even Number of Digits
 
 ## Problem
-
-Count digits in each number; count those with even digit length.
+Given an array of integers, return how many of them have an even number of digits.
 
 **Difficulty:** Easy | **Topic:** Arrays
-
 **[View on LeetCode](https://leetcode.com/problems/find-numbers-with-even-number-of-digits/)**
 
 **Examples:**
+```text
+Input: nums = [12,345,2,6,7896]
+Output: 2
 ```
-nums = [12,345,2,6,7896] -> 2
-nums = [555,901,482,1771] -> 1
-```
+
 ---
 
-## Approach 1 — String length check ✅
-
-**Idea:** len(str(num)) % 2 == 0 for each number.
+## My Approaches
+### Attempt 1 — len(str(n))
+**Why I used it:**
+Converting to a string makes counting digits trivial.
 
 ```python
-class Solution1:
-    def findNumbers(self, nums: List[int]) -> int:
-        return sum(1 for num in nums if len(str(num)) % 2 == 0)
+def findNumbers(self, nums: List[int]) -> int:
+    count = 0
+    for n in nums:
+        if len(str(n)) % 2 == 0:
+            count += 1
+    return count
 ```
 
 **Complexity:**
-- Time: O(n)
+- Time: O(n * d)
+- Space: O(1)
+
+---
+### Attempt 2 — Count Digits by Division ✅ Final Accepted Solution
+**Why I used it:**
+Avoids string conversion — divide by 10 repeatedly to count digits directly.
+
+```python
+def findNumbers(self, nums: List[int]) -> int:
+    count = 0
+    for n in nums:
+        digits = 0
+        while n > 0:
+            n //= 10
+            digits += 1
+        if digits % 2 == 0:
+            count += 1
+    return count
+```
+
+**Complexity:**
+- Time: O(n * d)
 - Space: O(1)
 
 ---
 
-## Approach 2 — Math log10
+---
 
-**Idea:** floor(log10(num)) + 1 gives digit count.
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+Digit counting via string conversion is clean and fast enough given LeetCode's constraints (values fit comfortably under 10^5), so `len(str(n))` is the pragmatic optimal choice in Python.
 
 ```python
-class Solution2:
-    def findNumbers(self, nums: List[int]) -> int:
-        import math
-        return sum(1 for num in nums if (math.floor(math.log10(num)) + 1) % 2 == 0)
+def findNumbers(self, nums: List[int]) -> int:
+    return sum(1 for n in nums if len(str(n)) % 2 == 0)
 ```
 
-**Complexity:**
-- Time: O(n)
+### Complexity
+- Time: O(n * d)
 - Space: O(1)
 
 ---
 
-
+---
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — String length check | O(n) | O(1) | ✅ Yes |
-| 2 — Math log10 | O(n) | O(1) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (Count Digits by Division) | O(n * d) | O(1) | ✅ |
+| Standard Approach 1 | O(n * d) | O(1) | ✅ |
+| len(str(n)) | O(n * d) | O(1) | ❌ |
+
+
+---
+
+## Key Takeaway
+Both string-length and manual digit-division approaches are O(d) per number — pick whichever reads more clearly for the language you're in.
 
 ---
 
 ## Reference
-
-[LeetCode #1295 — Find Numbers with Even Number of Digits](https://leetcode.com/problems/find-numbers-with-even-number-of-digits/)
+- LeetCode #1295 — Find Numbers with Even Number of Digits

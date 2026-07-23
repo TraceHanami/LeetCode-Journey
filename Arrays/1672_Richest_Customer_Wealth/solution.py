@@ -1,30 +1,44 @@
-from typing import List
+from typing import *
 
 # ─────────────────────────────────────────────────
-# APPROACH 1: Two Pointers (Recommended)
-# Time: O(n) | Space: O(1)
+# MY APPROACH 1: Running List of Prefix Sums
+# Why: Accumulated sums per row into a flat list, then took the max — works but does more bookkeeping than necessary.
+# Time: O(n * m)
+# Space: O(n * m)
 # ─────────────────────────────────────────────────
 class Solution1:
-    def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        lo, hi = 0, len(numbers) - 1
-        while lo < hi:
-            s = numbers[lo] + numbers[hi]
-            if s == target:
-                return [lo + 1, hi + 1]
-            elif s < target:
-                lo += 1
-            else:
-                hi -= 1
+    def maximumWealth(self, accounts: List[List[int]]) -> int:
+        sums = []
+        for row in accounts:
+            s = 0
+            for v in row:
+                s += v
+                sums.append(s)
+        return max(sums)
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Binary Search
-# Time: O(n log n) | Space: O(1)
+# MY APPROACH 2: Sum Each Row, Take the Max
+# Why: Only the final row total matters, so no need to store every partial sum.
+# Time: O(n * m)
+# Space: O(1) extra
 # ─────────────────────────────────────────────────
 class Solution2:
-    def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        import bisect
-        for i, num in enumerate(numbers):
-            comp = target - num
-            j = bisect.bisect_left(numbers, comp, i + 1)
-            if j < len(numbers) and numbers[j] == comp:
-                return [i + 1, j + 1]
+    def maximumWealth(self, accounts: List[List[int]]) -> int:
+        return max(sum(row) for row in accounts)
+
+
+# ─────────────────────────────────────────────────
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n * m)
+# Space: O(1) extra
+# ─────────────────────────────────────────────────
+class Solution:
+    def maximumWealth(self, accounts: List[List[int]]) -> int:
+        return max(sum(row) for row in accounts)
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

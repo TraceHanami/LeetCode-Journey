@@ -1,43 +1,34 @@
+from typing import *
+
 # ─────────────────────────────────────────────────
-# APPROACH 1: XOR (Recommended)
-# Time: O(n) | Space: O(1)
+# MY APPROACH 1: XOR All Characters
+# Why: XORing every character of both strings together cancels all matching pairs, leaving only the extra character's code.
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
 class Solution1:
     def findTheDifference(self, s: str, t: str) -> str:
+        r = 0
+        for ch in s + t:
+            r ^= ord(ch)
+        return chr(r)
+
+
+# ─────────────────────────────────────────────────
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(1)
+# ─────────────────────────────────────────────────
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
         result = 0
-        for c in s + t:
-            result ^= ord(c)
+        for ch in s + t:
+            result ^= ord(ch)
         return chr(result)
 
-
 # ─────────────────────────────────────────────────
-# APPROACH 2: Counter Difference
-# Time: O(n) | Space: O(1)
+# TESTING
 # ─────────────────────────────────────────────────
-class Solution2:
-    def findTheDifference(self, s: str, t: str) -> str:
-        from collections import Counter
-        diff = Counter(t) - Counter(s)
-        return list(diff.keys())[0]
-
-
-# ─────────────────────────────────────────────────
-# APPROACH 3: Sum of ASCII Values
-# Time: O(n) | Space: O(1)
-# ─────────────────────────────────────────────────
-class Solution3:
-    def findTheDifference(self, s: str, t: str) -> str:
-        return chr(sum(ord(c) for c in t) - sum(ord(c) for c in s))
-
-
-# ─────────────────────────────────────────────────
-# APPROACH 4: Sort and Compare
-# Time: O(n log n) | Space: O(n)
-# ─────────────────────────────────────────────────
-class Solution4:
-    def findTheDifference(self, s: str, t: str) -> str:
-        s, t = sorted(s), sorted(t)
-        for cs, ct in zip(s, t):
-            if cs != ct:
-                return ct
-        return t[-1]
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

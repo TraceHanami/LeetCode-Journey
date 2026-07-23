@@ -1,16 +1,31 @@
+from typing import *
+
 # ─────────────────────────────────────────────────
-# APPROACH 1: Counter Comparison (Recommended)
-# Time: O(n) | Space: O(1)
+# MY APPROACH 1: Sort and Compare
+# Why: Two strings are anagrams exactly when their sorted characters are identical.
+# Time: O(n log n)
+# Space: O(n)
 # ─────────────────────────────────────────────────
 class Solution1:
     def isAnagram(self, s: str, t: str) -> bool:
+        return sorted(s) == sorted(t)
+
+
+# ─────────────────────────────────────────────────
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(1) (bounded alphabet)
+# ─────────────────────────────────────────────────
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
         from collections import Counter
         return Counter(s) == Counter(t)
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Sort and Compare
-# Time: O(n log n) | Space: O(n)
+# TESTING
 # ─────────────────────────────────────────────────
-class Solution2:
-    def isAnagram(self, s: str, t: str) -> bool:
-        return sorted(s) == sorted(t)
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

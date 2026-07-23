@@ -1,30 +1,44 @@
-from typing import List
+from typing import *
 
 # ─────────────────────────────────────────────────
-# APPROACH 1: Two Pointers (Recommended)
-# Time: O(n) | Space: O(1)
+# MY APPROACH 1: Two Pointer (Optimal)
+# Why: Since the array is sorted, moving pointers inward based on whether the sum is too big or small avoids any extra space.
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
 class Solution1:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        lo, hi = 0, len(numbers) - 1
-        while lo < hi:
-            s = numbers[lo] + numbers[hi]
+        i, j = 0, len(numbers) - 1
+        while i < j:
+            s = numbers[i] + numbers[j]
             if s == target:
-                return [lo + 1, hi + 1]
-            elif s < target:
-                lo += 1
+                return [i + 1, j + 1]
+            elif s > target:
+                j -= 1
             else:
-                hi -= 1
+                i += 1
+
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Binary Search
-# Time: O(n log n) | Space: O(1)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
-class Solution2:
+class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        import bisect
-        for i, num in enumerate(numbers):
-            comp = target - num
-            j = bisect.bisect_left(numbers, comp, i + 1)
-            if j < len(numbers) and numbers[j] == comp:
-                return [i + 1, j + 1]
+        left, right = 0, len(numbers) - 1
+        while left < right:
+            total = numbers[left] + numbers[right]
+            if total == target:
+                return [left + 1, right + 1]
+            if total > target:
+                right -= 1
+            else:
+                left += 1
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

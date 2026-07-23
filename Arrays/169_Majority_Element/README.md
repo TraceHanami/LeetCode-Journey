@@ -1,52 +1,32 @@
 # 169 — Majority Element
 
 ## Problem
-
-Boyer-Moore Voting: the majority element cancels out all others.
+Given an array of size n, return the element that appears more than n/2 times.
 
 **Difficulty:** Easy | **Topic:** Arrays
-
 **[View on LeetCode](https://leetcode.com/problems/majority-element/)**
 
 **Examples:**
-```
-nums = [3,2,3] -> 3
-nums = [2,2,1,1,1,2,2] -> 2
+```text
+Input: nums = [2,2,1,1,1,2,2]
+Output: 2
 ```
 
 ---
 
-## Approach 1 — Boyer-Moore Voting ✅
-
-**Idea:** Maintain candidate and count. Increment if same, decrement if different, reset at 0.
-
-```python
-class Solution1:
-    def majorityElement(self, nums: List[int]) -> int:
-        candidate, count = None, 0
-        for num in nums:
-            if count == 0:
-                candidate = num
-            count += 1 if num == candidate else -1
-        return candidate
-```
-
-**Complexity:**
-- Time: O(n)
-- Space: O(1)
-
----
-
-## Approach 2 — Hash map count
-
-**Idea:** Count frequencies with Counter, return element with count > n//2.
+## My Approaches
+### Attempt 1 — Frequency Map
+**Why I used it:**
+Count occurrences of every value, then check which one crosses the n/2 threshold.
 
 ```python
-class Solution2:
-    def majorityElement(self, nums: List[int]) -> int:
-        from collections import Counter
-        return Counter(nums).most_common(1)[0][0]
-
+def majorityElement(self, nums: List[int]) -> int:
+    freq = {}
+    for n in nums:
+        freq[n] = freq.get(n, 0) + 1
+    for k, v in freq.items():
+        if v > len(nums) // 2:
+            return k
 ```
 
 **Complexity:**
@@ -54,36 +34,67 @@ class Solution2:
 - Space: O(n)
 
 ---
-
-## Approach 3 — Sort
-
-**Idea:** Sorted array — majority element always occupies index n//2.
+### Attempt 2 — Boyer-Moore Voting ✅ Final Accepted Solution
+**Why I used it:**
+Since a true majority element is guaranteed to exist, votes for/against a candidate cancel out and the majority always survives.
 
 ```python
-class Solution3:
-    def majorityElement(self, nums: List[int]) -> int:
-        nums.sort()
-        return nums[len(nums) // 2]
+def majorityElement(self, nums: List[int]) -> int:
+    count = 0
+    candidate = None
+    for n in nums:
+        if count == 0:
+            candidate = n
+        count += 1 if n == candidate else -1
+    return candidate
 ```
 
 **Complexity:**
-- Time: O(n log n)
+- Time: O(n)
 - Space: O(1)
 
 ---
 
+---
 
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+Boyer-Moore Voting: maintain a candidate and a counter. Increment the counter when seeing the candidate, decrement otherwise. When the counter hits zero, switch candidates. Because the majority element appears more than n/2 times, it's guaranteed to outlast every other value's cancellations.
+
+```python
+def majorityElement(self, nums: List[int]) -> int:
+    count = 0
+    candidate = None
+    for n in nums:
+        if count == 0:
+            candidate = n
+        count += 1 if n == candidate else -1
+    return candidate
+```
+
+### Complexity
+- Time: O(n)
+- Space: O(1)
+
+---
+
+---
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Boyer-Moore Voting | O(n) | O(1) | ✅ Yes |
-| 2 — Hash map count | O(n) | O(n) | No |
-| 3 — Sort | O(n log n) | O(1) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (Boyer-Moore Voting) | O(n) | O(1) | ✅ |
+| Standard Approach 1 | O(n) | O(1) | ✅ |
+| Frequency Map | O(n) | O(n) | ❌ |
+
+
+---
+
+## Key Takeaway
+Boyer-Moore Voting solves this in O(1) space by treating it as a cancellation game — the guaranteed majority element can never be fully cancelled out.
 
 ---
 
 ## Reference
-
-[LeetCode #169 — Majority Element](https://leetcode.com/problems/majority-element/)
+- LeetCode #169 — Majority Element

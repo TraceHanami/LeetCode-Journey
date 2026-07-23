@@ -1,24 +1,44 @@
+from typing import *
+
 # ─────────────────────────────────────────────────
-# APPROACH 1: Two Hash Maps (Recommended)
-# Time: O(n) | Space: O(1)
+# MY APPROACH 1: Two-Way Mapping Dictionaries
+# Why: A one-to-one mapping must be consistent in both directions, so track mappings from s->t and t->s simultaneously.
+# Time: O(n)
+# Space: O(1) (bounded alphabet)
 # ─────────────────────────────────────────────────
 class Solution1:
     def isIsomorphic(self, s: str, t: str) -> bool:
-        s_to_t, t_to_s = {}, {}
-        for cs, ct in zip(s, t):
-            if s_to_t.get(cs, ct) != ct or t_to_s.get(ct, cs) != cs:
+        m, z = {}, {}
+        for i, j in zip(s, t):
+            if i in m and m[i] != j:
                 return False
-            s_to_t[cs] = ct
-            t_to_s[ct] = cs
+            if j in z and z[j] != i:
+                return False
+            m[i] = j
+            z[j] = i
+        return True
+
+
+# ─────────────────────────────────────────────────
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(1) (bounded alphabet)
+# ─────────────────────────────────────────────────
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        s_to_t, t_to_s = {}, {}
+        for a, b in zip(s, t):
+            if a in s_to_t and s_to_t[a] != b:
+                return False
+            if b in t_to_s and t_to_s[b] != a:
+                return False
+            s_to_t[a] = b
+            t_to_s[b] = a
         return True
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Encode Pattern
-# Time: O(n) | Space: O(n)
+# TESTING
 # ─────────────────────────────────────────────────
-class Solution2:
-    def isIsomorphic(self, s: str, t: str) -> bool:
-        def encode(string):
-            mapping = {}
-            return [mapping.setdefault(c, len(mapping)) for c in string]
-        return encode(s) == encode(t)
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

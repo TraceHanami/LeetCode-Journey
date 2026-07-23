@@ -1,28 +1,40 @@
-from typing import List
+from typing import *
 
 # ─────────────────────────────────────────────────
-# APPROACH 1: Single Pass Greedy (Recommended)
-# Time: O(n) | Space: O(1)
+# MY APPROACH 1: Track Minimum Seen So Far
+# Why: Only need to remember the lowest price so far and check the profit if selling today.
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
 class Solution1:
     def maxProfit(self, prices: List[int]) -> int:
         min_price = float('inf')
-        max_profit = 0
-        for price in prices:
-            if price < min_price:
-                min_price = price
-            elif price - min_price > max_profit:
-                max_profit = price - min_price
-        return max_profit
+        best = 0
+        for p in prices:
+            if p < min_price:
+                min_price = p
+            elif p - min_price > best:
+                best = p - min_price
+        return best
+
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Kadane's Variant (Max Subarray on Differences)
-# Time: O(n) | Space: O(1)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
-class Solution2:
+class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        max_profit = curr = 0
-        for i in range(1, len(prices)):
-            curr = max(0, curr + prices[i] - prices[i-1])
-            max_profit = max(max_profit, curr)
-        return max_profit
+        min_price = float('inf')
+        best_profit = 0
+        for price in prices:
+            min_price = min(min_price, price)
+            best_profit = max(best_profit, price - min_price)
+        return best_profit
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

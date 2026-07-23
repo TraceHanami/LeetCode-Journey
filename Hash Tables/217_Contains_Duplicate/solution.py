@@ -1,21 +1,43 @@
-from typing import List
+from typing import *
 
 # ─────────────────────────────────────────────────
-# APPROACH 1: Hash Set (Recommended)
-# Time: O(n) | Space: O(n)
+# MY APPROACH 1: Set Membership While Scanning
+# Why: Check membership before adding, so the first repeat is caught immediately without a second pass.
+# Time: O(n)
+# Space: O(n)
 # ─────────────────────────────────────────────────
 class Solution1:
     def containsDuplicate(self, nums: List[int]) -> bool:
-        return len(set(nums)) < len(nums)
+        seen = set()
+        for n in nums:
+            if n in seen:
+                return True
+            seen.add(n)
+        return False
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Sort and Check Adjacent
-# Time: O(n log n) | Space: O(1)
+# MY APPROACH 2: Compare Lengths of List vs Set
+# Why: A set automatically discards duplicates — if its length differs from the original list, duplicates exist.
+# Time: O(n)
+# Space: O(n)
 # ─────────────────────────────────────────────────
 class Solution2:
     def containsDuplicate(self, nums: List[int]) -> bool:
-        nums.sort()
-        for i in range(1, len(nums)):
-            if nums[i] == nums[i - 1]:
-                return True
-        return False
+        return len(nums) != len(set(nums))
+
+
+# ─────────────────────────────────────────────────
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(n)
+# ─────────────────────────────────────────────────
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        return len(nums) != len(set(nums))
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

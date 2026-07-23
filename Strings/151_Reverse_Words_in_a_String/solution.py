@@ -1,21 +1,29 @@
+from typing import *
+
 # ─────────────────────────────────────────────────
-# APPROACH 1: Split and Reverse (Recommended)
-# Time: O(n) | Space: O(n)
+# MY APPROACH 1: split() + reversed join
+# Why: Python's split() already collapses multiple spaces and strips leading/trailing whitespace, so reversing the resulting list is enough.
+# Time: O(n)
+# Space: O(n)
 # ─────────────────────────────────────────────────
 class Solution1:
     def reverseWords(self, s: str) -> str:
-        return ' '.join(reversed(s.split()))
+        return " ".join(s.split()[::-1])
+
 
 # ─────────────────────────────────────────────────
-# APPROACH 2: Two Pointers In-Place Reverse
-# Time: O(n) | Space: O(n)
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(n)
 # ─────────────────────────────────────────────────
-class Solution2:
+class Solution:
     def reverseWords(self, s: str) -> str:
         words = s.split()
-        lo, hi = 0, len(words) - 1
-        while lo < hi:
-            words[lo], words[hi] = words[hi], words[lo]
-            lo += 1
-            hi -= 1
-        return ' '.join(words)
+        return " ".join(reversed(words))
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

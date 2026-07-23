@@ -1,89 +1,73 @@
 # 191 — Number of 1 Bits
 
 ## Problem
-
-Count set bits in the binary representation of n.
+Given a positive integer, return the number of set bits (Hamming weight) in its binary representation.
 
 **Difficulty:** Easy | **Topic:** Bit Manipulation
-
 **[View on LeetCode](https://leetcode.com/problems/number-of-1-bits/)**
 
 **Examples:**
+```text
+Input: n = 11 (1011)
+Output: 3
 ```
-n = 11 -> 3
-n = 128 -> 1
-n = 2147483645 -> 30
-```
+
 ---
 
-## Approach 1 — Bit mask loop ✅
-
-**Idea:** AND n with 1 to check last bit, right-shift n each iteration.
+## My Approaches
+### Attempt 1 — Count '1's in Binary String ✅ Final Accepted Solution
+**Why I used it:**
+Convert to binary text and count the characters that equal '1'.
 
 ```python
-class Solution1:
-    def hammingWeight(self, n: int) -> int:
-        count = 0
-        while n:
-            count += n & 1
-            n >>= 1
-        return count
+def hammingWeight(self, n: int) -> int:
+    bits = bin(n)[2:]
+    return sum(1 for b in bits if b == '1')
 ```
 
 **Complexity:**
-- Time: O(1)
+- Time: O(32) = O(1)
 - Space: O(1)
 
 ---
 
-## Approach 2 — Brian Kernighan
+---
 
-**Idea:** n & (n-1) clears the lowest set bit. Count how many times until n=0.
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+Brian Kernighan's trick: `n & (n - 1)` clears the lowest set bit. Repeating this until n becomes 0 counts exactly as many times as there were set bits — faster on average than checking every bit position.
 
 ```python
-class Solution2:
-    def hammingWeight(self, n: int) -> int:
-        count = 0
-        while n:
-            n &= n - 1  # clears lowest set bit
-            count += 1
-        return count
+def hammingWeight(self, n: int) -> int:
+    count = 0
+    while n:
+        n &= n - 1
+        count += 1
+    return count
 ```
 
-**Complexity:**
-- Time: O(k)
+### Complexity
+- Time: O(k) where k = number of set bits
 - Space: O(1)
 
 ---
 
-## Approach 3 — Built-in bin()
-
-**Idea:** bin(n).count('1')
-
-```python
-class Solution3:
-    def hammingWeight(self, n: int) -> int:
-        return bin(n).count('1')
-```
-
-**Complexity:**
-- Time: O(1)
-- Space: O(1)
-
 ---
-
-
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Bit mask loop | O(1) | O(1) | ✅ Yes |
-| 2 — Brian Kernighan | O(k) | O(1) | No |
-| 3 — Built-in bin() | O(1) | O(1) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (Count '1's in Binary String) | O(32) = O(1) | O(1) | ✅ |
+| Standard Approach 1 | O(k) where k = number of set bits | O(1) | ✅ |
+
+
+---
+
+## Key Takeaway
+Brian Kernighan's `n & (n - 1)` trick clears one set bit per iteration, making the loop run proportional to the number of 1s rather than 32 fixed iterations.
 
 ---
 
 ## Reference
-
-[LeetCode #191 — Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
+- LeetCode #191 — Number of 1 Bits

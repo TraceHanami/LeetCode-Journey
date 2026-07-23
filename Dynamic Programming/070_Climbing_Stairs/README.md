@@ -1,33 +1,32 @@
-# 70 — Climbing Stairs
+# 070 — Climbing Stairs
 
 ## Problem
-
-At each step you can come from one or two steps back — Fibonacci pattern.
+You can climb 1 or 2 steps at a time. Given n steps, return the number of distinct ways to reach the top.
 
 **Difficulty:** Easy | **Topic:** Dynamic Programming
-
 **[View on LeetCode](https://leetcode.com/problems/climbing-stairs/)**
 
 **Examples:**
+```text
+Input: n = 3
+Output: 3  (1+1+1, 1+2, 2+1)
 ```
-n = 2 -> 2
-n = 3 -> 3
-```
+
 ---
 
-## Approach 1 — Iterative DP ✅
-
-**Idea:** dp[i] = dp[i-1] + dp[i-2]. Use two variables instead of array.
+## My Approaches
+### Attempt 1 — Iterative Fibonacci-Style DP ✅ Final Accepted Solution
+**Why I used it:**
+Recognized ways(n) = ways(n-1) + ways(n-2), so just build it up bottom-up with two rolling variables.
 
 ```python
-class Solution1:
-    def climbStairs(self, n: int) -> int:
-        if n <= 2:
-            return n
-        a, b = 1, 2
-        for _ in range(3, n + 1):
-            a, b = b, a + b
-        return b
+def climbStairs(self, n: int) -> int:
+    if n <= 2:
+        return n
+    prev, curr = 1, 2
+    for _ in range(3, n + 1):
+        prev, curr = curr, prev + curr
+    return curr
 ```
 
 **Complexity:**
@@ -36,80 +35,44 @@ class Solution1:
 
 ---
 
-## Approach 2 — Memoization
-
-**Idea:** Recursive with cache.
-
-```python
-class Solution2:
-    def climbStairs(self, n: int) -> int:
-        memo = {}
-        def dp(i):
-            if i <= 2:
-                return i
-            if i not in memo:
-                memo[i] = dp(i - 1) + dp(i - 2)
-            return memo[i]
-        return dp(n)
-```
-
-**Complexity:**
-- Time: O(n)
-- Space: O(n)
-
 ---
 
-## Approach 3 — Matrix exponentiation
-
-**Idea:** Optimal for very large n.
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+This is Fibonacci in disguise: to reach step n, your last move was either a 1-step from n-1 or a 2-step from n-2, so ways(n) = ways(n-1) + ways(n-2). Track only the last two values instead of a full DP array.
 
 ```python
-class Solution:
-    def climbStairs(self, n: int) -> int:
-        if n <= 2:
-            return n
-        def multiply(A, B):
-            return [
-                [
-                    A[0][0] * B[0][0] + A[0][1] * B[1][0],
-                    A[0][0] * B[0][1] + A[0][1] * B[1][1]
-                ],
-                [
-                    A[1][0] * B[0][0] + A[1][1] * B[1][0],
-                    A[1][0] * B[0][1] + A[1][1] * B[1][1]
-                ]
-            ]
-        def power(matrix, exp):
-            result = [[1, 0], [0, 1]]  # Identity matrix
-            while exp:
-                if exp & 1:
-                    result = multiply(result, matrix)
-                matrix = multiply(matrix, matrix)
-                exp >>= 1
-            return result
-        base = [[1, 1], [1, 0]]
-        res = power(base, n)
-        return res[0][1]
+def climbStairs(self, n: int) -> int:
+    if n <= 2:
+        return n
+    a, b = 1, 2
+    for _ in range(3, n + 1):
+        a, b = b, a + b
+    return b
 ```
 
-**Complexity:**
-- Time: O(log n)
+### Complexity
+- Time: O(n)
 - Space: O(1)
 
 ---
 
-
+---
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Iterative DP | O(n) | O(1) | ✅ Yes |
-| 2 — Memoization | O(n) | O(n) | No |
-| 3 — Matrix exponentiation | O(log n) | O(1) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (Iterative Fibonacci-Style DP) | O(n) | O(1) | ✅ |
+| Standard Approach 1 | O(n) | O(1) | ✅ |
+
+
+---
+
+## Key Takeaway
+Recognizing the recurrence as Fibonacci immediately suggests the O(1)-space rolling-variable optimization instead of a full DP table.
 
 ---
 
 ## Reference
-
-[LeetCode #70 — Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
+- LeetCode #70 — Climbing Stairs

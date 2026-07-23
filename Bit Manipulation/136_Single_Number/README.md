@@ -1,90 +1,74 @@
 # 136 — Single Number
 
 ## Problem
-
-XOR of all elements — duplicates cancel out, leaving the unique number.
+Given a non-empty array where every element appears twice except for one, find that single one.
 
 **Difficulty:** Easy | **Topic:** Bit Manipulation
-
 **[View on LeetCode](https://leetcode.com/problems/single-number/)**
 
 **Examples:**
+```text
+Input: nums = [4,1,2,1,2]
+Output: 4
 ```
-nums = [2,2,1] -> 1 
-nums = [1] -> 1
-nums = [4,1,2,1,2] -> 4
-```
+
 ---
 
-## Approach 1 — XOR ✅
-
-**Idea:** XOR all numbers. Pairs cancel to 0; result is the single number.
+## My Approaches
+### Attempt 1 — XOR All Elements ✅ Final Accepted Solution
+**Why I used it:**
+XOR cancels out pairs of equal numbers, leaving only the one without a pair.
 
 ```python
-class Solution1:
-    def singleNumber(self, nums: List[int]) -> int:
-        result = 0
-        for num in nums:
-            result ^= num
-        return result
-
+def singleNumber(self, nums: List[int]) -> int:
+    result = 0
+    for n in nums:
+        result ^= n
+    return result
 ```
+
 **Complexity:**
 - Time: O(n)
 - Space: O(1)
 
 ---
 
-## Approach 2 — Hash set
+---
 
-**Idea:** Add to set if not present, remove if present. Remaining element is the answer.
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+XOR is commutative, associative, and a number XORed with itself is 0. XORing every element together cancels all duplicates in pairs, leaving only the unpaired number.
 
 ```python
-class Solution2:
-    def singleNumber(self, nums: List[int]) -> int:
-        seen = set()
-        for num in nums:
-            if num in seen:
-                seen.remove(num)
-            else:
-                seen.add(num)
-        return seen.pop()
+def singleNumber(self, nums: List[int]) -> int:
+    result = 0
+    for n in nums:
+        result ^= n
+    return result
 ```
 
-**Complexity:**
+### Complexity
 - Time: O(n)
-- Space: O(n)
+- Space: O(1)
 
 ---
 
-## Approach 3 — Math
-
-**Idea:** 2*sum(set(nums)) - sum(nums).
-
-```python
-class Solution3:
-    def singleNumber(self, nums: List[int]) -> int:
-        return 2 * sum(set(nums)) - sum(nums)
-```
-
-**Complexity:**
-- Time: O(n)
-- Space: O(n)
-
 ---
-
-
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — XOR | O(n) | O(1) | ✅ Yes |
-| 2 — Hash set | O(n) | O(n) | No |
-| 3 — Math | O(n) | O(n) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (XOR All Elements) | O(n) | O(1) | ✅ |
+| Standard Approach 1 | O(n) | O(1) | ✅ |
+
+
+---
+
+## Key Takeaway
+XOR-cancellation is the go-to trick whenever a problem guarantees everything appears in pairs except one element.
 
 ---
 
 ## Reference
-
-[LeetCode #136 — Single Number](https://leetcode.com/problems/single-number/)
+- LeetCode #136 — Single Number

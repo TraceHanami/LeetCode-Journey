@@ -1,38 +1,39 @@
-# 35 — Search Insert Position
+# 035 — Search Insert Position
 
 ## Problem
-
-Binary search — if not found, left pointer is the insert position.
+Given a sorted array of distinct integers and a target, return the index if found, or the index where it would be inserted in order.
 
 **Difficulty:** Easy | **Topic:** Binary Search
-
 **[View on LeetCode](https://leetcode.com/problems/search-insert-position/)**
 
-**Exampels:**
+**Examples:**
+```text
+Input: nums = [1,3,5,6], target = 5
+Output: 2
+
+Input: nums = [1,3,5,6], target = 2
+Output: 1
 ```
-nums = [1,3,5,6], target = 5 -> 2
-nums = [1,3,5,6], target = 2 -> 1
-nums = [1,3,5,6], target = 7 -> 4
-```
+
 ---
 
-## Approach 1 — Binary search ✅
-
-**Idea:** Standard binary search. Return lo when target not found — lo is the insert position.
+## My Approaches
+### Attempt 1 — Binary Search ✅ Final Accepted Solution
+**Why I used it:**
+Sorted array means the insertion point can be found in O(log n) instead of scanning linearly.
 
 ```python
- class Solution1:
-    def searchInsert(self, nums: List[int], target: int) -> int:
-        lo, hi = 0, len(nums) - 1
-        while lo <= hi:
-            mid = (lo + hi) // 2
-            if nums[mid] == target:
-                return mid
-            elif nums[mid] < target:
-                lo = mid + 1
-            else:
-                hi = mid - 1
-        return lo
+def searchInsert(self, nums: List[int], target: int) -> int:
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] == target:
+            return mid
+        elif nums[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return left
 ```
 
 **Complexity:**
@@ -41,36 +42,48 @@ nums = [1,3,5,6], target = 7 -> 4
 
 ---
 
-## Approach 2 — Linear scan
+---
 
-**Idea:** Scan left to right, return index of first element >= target.
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+Classic binary search. When the target isn't found, `left` naturally ends up exactly at the index where the target should be inserted to keep the array sorted.
 
 ```python
-class Solution2:
-    def searchInsert(self, nums: List[int], target: int) -> int:
-        for i, num in enumerate(nums):
-            if num >= target:
-                return i
-        return len(nums)
+def searchInsert(self, nums: List[int], target: int) -> int:
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] == target:
+            return mid
+        if nums[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return left
 ```
 
-**Complexity:**
-- Time: O(n)
+### Complexity
+- Time: O(log n)
 - Space: O(1)
 
 ---
 
-
+---
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Binary search | O(log n) | O(1) | ✅ Yes |
-| 2 — Linear scan | O(n) | O(1) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (Binary Search) | O(log n) | O(1) | ✅ |
+| Standard Approach 1 | O(log n) | O(1) | ✅ |
+
+
+---
+
+## Key Takeaway
+When binary search 'fails' to find the target, the left pointer lands exactly on the correct insertion index — no extra logic needed.
 
 ---
 
 ## Reference
-
-[LeetCode #35 — Search Insert Position](https://leetcode.com/problems/search-insert-position/)
+- LeetCode #35 — Search Insert Position

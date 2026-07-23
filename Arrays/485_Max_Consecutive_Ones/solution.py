@@ -1,16 +1,40 @@
-from typing import List
+from typing import *
 
 # ─────────────────────────────────────────────────
-# APPROACH 1: Single Pass (Recommended)
-# Time: O(n) | Space: O(1)
+# MY APPROACH 1: Running Streak Counter
+# Why: Track the current streak of 1s, resetting to 0 on any 0, and keep the max streak seen.
+# Time: O(n)
+# Space: O(1)
 # ─────────────────────────────────────────────────
 class Solution1:
     def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
-        max_count = curr = 0
-        for num in nums:
-            if num == 1:
-                curr += 1
-                max_count = max(max_count, curr)
+        best = 0
+        streak = 0
+        for n in nums:
+            if n == 1:
+                streak += 1
+                best = max(best, streak)
             else:
-                curr = 0
-        return max_count
+                streak = 0
+        return best
+
+
+# ─────────────────────────────────────────────────
+# STANDARD / OPTIMAL APPROACH
+# Time: O(n)
+# Space: O(1)
+# ─────────────────────────────────────────────────
+class Solution:
+    def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
+        best = streak = 0
+        for n in nums:
+            streak = streak + 1 if n == 1 else 0
+            best = max(best, streak)
+        return best
+
+# ─────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────
+if __name__ == "__main__":
+    sol = Solution()
+    print("Add test cases here")

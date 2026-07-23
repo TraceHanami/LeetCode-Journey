@@ -1,46 +1,32 @@
 # 1480 — Running Sum of 1d Array
 
 ## Problem
-
-Each element becomes the sum of all elements up to and including itself.
+Given an array nums, return the running sum where runningSum[i] = sum(nums[0..i]).
 
 **Difficulty:** Easy | **Topic:** Arrays
-
 **[View on LeetCode](https://leetcode.com/problems/running-sum-of-1d-array/)**
 
 **Examples:**
+```text
+Input: nums = [1,2,3,4]
+Output: [1,3,6,10]
 ```
-nums = [1,2,3,4] -> [1,3,6,10] 
-nums = [1,1,1,1,1] -> [1,2,3,4,5]
----
-
-## Approach 1 — In-place prefix sum ✅
-
-**Idea:** nums[i] += nums[i-1] for i in range(1, n).
-
-```python
-class Solution1:
-    def runningSum(self, nums: List[int]) -> List[int]:
-        for i in range(1, len(nums)):
-            nums[i] += nums[i - 1]
-        return nums
-```
-
-**Complexity:**
-- Time: O(n)
-- Space: O(1)
 
 ---
 
-## Approach 2 — itertools.accumulate
-
-**Idea:** list(itertools.accumulate(nums)).
+## My Approaches
+### Attempt 1 — Accumulate in a Running Total ✅ Final Accepted Solution
+**Why I used it:**
+Keep a running total and append it as you scan through the array once.
 
 ```python
-class Solution2:
-    def runningSum(self, nums: List[int]) -> List[int]:
-        import itertools
-        return list(itertools.accumulate(nums))
+def runningSum(self, nums: List[int]) -> List[int]:
+    result = []
+    total = 0
+    for n in nums:
+        total += n
+        result.append(total)
+    return result
 ```
 
 **Complexity:**
@@ -49,17 +35,44 @@ class Solution2:
 
 ---
 
+---
 
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+A prefix sum is exactly a running total — accumulate as you go, in one linear pass.
+
+```python
+def runningSum(self, nums: List[int]) -> List[int]:
+    total = 0
+    result = []
+    for n in nums:
+        total += n
+        result.append(total)
+    return result
+```
+
+### Complexity
+- Time: O(n)
+- Space: O(n)
+
+---
+
+---
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — In-place prefix sum | O(n) | O(1) | ✅ Yes |
-| 2 — itertools.accumulate | O(n) | O(n) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (Accumulate in a Running Total) | O(n) | O(n) | ✅ |
+| Standard Approach 1 | O(n) | O(n) | ✅ |
+
+
+---
+
+## Key Takeaway
+This is the textbook definition of a prefix sum — a single accumulating pass.
 
 ---
 
 ## Reference
-
-[LeetCode #1480 — Running Sum of 1d Array](https://leetcode.com/problems/running-sum-of-1d-array/)
+- LeetCode #1480 — Running Sum of 1d Array

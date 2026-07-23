@@ -1,29 +1,49 @@
 # 217 — Contains Duplicate
 
 ## Problem
-
-A set cannot have duplicates — if set size < array size, duplicates exist.
+Given an integer array, return true if any value appears at least twice.
 
 **Difficulty:** Easy | **Topic:** Hash Tables
-
 **[View on LeetCode](https://leetcode.com/problems/contains-duplicate/)**
 
-**Examples**
+**Examples:**
+```text
+Input: nums = [1,2,3,1]
+Output: true
+
+Input: nums = [1,2,3,4]
+Output: false
 ```
-nums = [1,2,3,1] -> true
-nums = [1,2,3,4] -> false
-nums = [1,1,1,3,3,4,3,2,4,2-> true
-```
+
 ---
 
-## Approach 1 — Hash set ✅
-
-**Idea:** return len(set(nums)) < len(nums).
+## My Approaches
+### Attempt 1 — Set Membership While Scanning
+**Why I used it:**
+Check membership before adding, so the first repeat is caught immediately without a second pass.
 
 ```python
-class Solution1:
-    def containsDuplicate(self, nums: List[int]) -> bool:
-        return len(set(nums)) < len(nums)
+def containsDuplicate(self, nums: List[int]) -> bool:
+    seen = set()
+    for n in nums:
+        if n in seen:
+            return True
+        seen.add(n)
+    return False
+```
+
+**Complexity:**
+- Time: O(n)
+- Space: O(n)
+
+---
+### Attempt 2 — Compare Lengths of List vs Set ✅ Final Accepted Solution
+**Why I used it:**
+A set automatically discards duplicates — if its length differs from the original list, duplicates exist.
+
+```python
+def containsDuplicate(self, nums: List[int]) -> bool:
+    return len(nums) != len(set(nums))
 ```
 
 **Complexity:**
@@ -32,37 +52,40 @@ class Solution1:
 
 ---
 
-## Approach 2 — Sort
+---
 
-**Idea:** Sort and check adjacent elements.
+## Standard Approach
+### Standard Approach 1 — Recommended ✅
+### Idea
+Converting to a set removes duplicates automatically; comparing lengths tells you in one line whether any duplicates existed. Functionally identical in complexity to scanning with a seen-set, just more concise.
 
 ```python
-class Solution2:
-    def containsDuplicate(self, nums: List[int]) -> bool:
-        nums.sort()
-        for i in range(1, len(nums)):
-            if nums[i] == nums[i - 1]:
-                return True
-        return False
+def containsDuplicate(self, nums: List[int]) -> bool:
+    return len(nums) != len(set(nums))
 ```
 
-**Complexity:**
-- Time: O(n log n)
-- Space: O(1)
+### Complexity
+- Time: O(n)
+- Space: O(n)
 
 ---
 
-
+---
 
 ## Comparison
-
 | Approach | Time | Space | Recommended |
-|---|---|---|---|
-| 1 — Hash set | O(n) | O(n) | ✅ Yes |
-| 2 — Sort | O(n log n) | O(1) | No |
+|-----------|--------|---------|-------------|
+| My Final Solution (Compare Lengths of List vs Set) | O(n) | O(n) | ✅ |
+| Standard Approach 1 | O(n) | O(n) | ✅ |
+| Set Membership While Scanning | O(n) | O(n) | ❌ |
+
+
+---
+
+## Key Takeaway
+Both a scan-with-seen-set and a length-comparison approach are O(n) time and space — the length comparison is just a terser way to express the same idea.
 
 ---
 
 ## Reference
-
-[LeetCode #217 — Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
+- LeetCode #217 — Contains Duplicate
