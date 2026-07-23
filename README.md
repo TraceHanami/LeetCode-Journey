@@ -213,7 +213,6 @@ Each problem lives in its own folder:
 
 ## Goals
 
-- [ ] Recover/re-submit 171 — Excel Sheet Column Number
 - [ ] Solve problems consistently — minimum 5 per week
 - [ ] Reach 100+ solved problems
 - [ ] Participate in weekly contests regularly
