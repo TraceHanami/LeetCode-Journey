@@ -62,7 +62,8 @@ LeetCode-Journey/
 ├── Sliding Window/
 ├── Sorting/
 ├── Stacks/
-└── Strings/
+├── Strings/
+└── Trees/
 ```
 
 Each problem lives in its own folder:
@@ -77,24 +78,25 @@ Each problem lives in its own folder:
 
 ## Progress
 
-**Total problems recovered: 80** (all 80 with source code recovered ✅)
+**Total problems recovered: 88** (all 88 with source code recovered ✅)
 
 | Category | Count |
 |---|---|
 | Arrays | 31 |
-| Backtracking | 1 |
+| Backtracking | 2 |
 | Binary Search | 3 |
 | Bit Manipulation | 3 |
 | Dynamic Programming | 2 |
 | Greedy | 2 |
 | Hash Tables | 8 |
 | Linked Lists | 2 |
-| Math | 2 |
-| Simulation | 1 |
+| Math | 4 |
+| Simulation | 2 |
 | Sliding Window | 8 |
-| Sorting | 1 |
-| Stacks | 1 |
+| Sorting | 2 |
+| Stacks | 2 |
 | Strings | 15 |
+| Trees | 2 |
 
 ---
 
@@ -133,7 +135,8 @@ Each problem lives in its own folder:
 - [2529 — Maximum Count of Positive Integer and Negative Integer](Arrays/2529_Maximum_Count_of_Positive_Integer_and_Negative_Integer/README.md)
 - [2798 — Number of Employees Who Met the Target](Arrays/2798_Number_of_Employees_Who_Met_the_Target/README.md)
 
-### Backtracking (1)
+### Backtracking (2)
+- [046 — Permutations](Backtracking/046_Permutations/README.md)
 - [980 — Unique Paths III](Backtracking/980_Unique_Paths_III/README.md)
 
 ### Binary Search (3)
@@ -168,11 +171,14 @@ Each problem lives in its own folder:
 - [021 — Merge Two Sorted Lists](Linked%20Lists/021_Merge_Two_Sorted_Lists/README.md)
 - [083 — Remove Duplicates from Sorted List](Linked%20Lists/083_Remove_Duplicates_from_Sorted_List/README.md)
 
-### Math (2)
+### Math (4)
+- [050 — Pow(x, n)](Math/050_Pow_x_n/README.md)
+- [412 — Fizz Buzz](Math/412_Fizz_Buzz/README.md)
 - [1291 — Sequential Digits](Math/1291_Sequential_Digits/README.md)
 - [3754 — Concatenate Non-Zero Digits and Multiply by Sum I](Math/3754_Concatenate_Non_Zero_Digits_and_Multiply_by_Sum_I/README.md)
 
-### Simulation (1)
+### Simulation (2)
+- [054 — Spiral Matrix](Simulation/054_Spiral_Matrix/README.md)
 - [1260 — Shift 2D Grid](Simulation/1260_Shift_2D_Grid/README.md)
 
 ### Sliding Window (8)
@@ -185,11 +191,13 @@ Each problem lives in its own folder:
 - [1446 — Consecutive Characters](Sliding%20Window/1446_Consecutive_Characters/README.md)
 - [2461 — Maximum Sum of Distinct Subarrays With Length K](Sliding%20Window/2461_Maximum_Sum_of_Distinct_Subarrays_With_Length_K/README.md)
 
-### Sorting (1)
+### Sorting (2)
+- [506 — Relative Ranks](Sorting/506_Relative_Ranks/README.md)
 - [1331 — Rank Transform of an Array](Sorting/1331_Rank_Transform_of_an_Array/README.md)
 
-### Stacks (1)
+### Stacks (2)
 - [020 — Valid Parentheses](Stacks/020_Valid_Parentheses/README.md)
+- [155 — Min Stack](Stacks/155_Min_Stack/README.md)
 
 ### Strings (15)
 - [003 — Longest Substring Without Repeating Characters](Strings/003_Longest_Substring_Without_Repeating_Characters/README.md)
@@ -208,12 +216,16 @@ Each problem lives in its own folder:
 - [3612 — Process String with Special Operations I](Strings/3612_Process_String_with_Special_Operations_I/README.md)
 - [3614 — Process String with Special Operations II](Strings/3614_Process_String_with_Special_Operations_II/README.md)
 
+### Trees (2)
+- [094 — Binary Tree Inorder Traversal](Trees/094_Binary_Tree_Inorder_Traversal/README.md)
+- [257 — Binary Tree Paths](Trees/257_Binary_Tree_Paths/README.md)
+
 ---
 
 ## Topics Covered
 
 ### Data Structures
-`Arrays` · `Strings` · `Hash Tables` · `Linked Lists` · `Stacks`
+`Arrays` · `Strings` · `Hash Tables` · `Linked Lists` · `Stacks` · `Trees`
 
 ### Algorithms
 `Binary Search` · `Two Pointers` · `Sliding Window` · `Backtracking` · `Greedy` · `Dynamic Programming` · `Bit Manipulation` · `Math` · `Simulation` · `Sorting`
@@ -225,8 +237,8 @@ Each problem lives in its own folder:
 | Stage | Topics | Status |
 |---|---|---|
 | **Foundation** | Arrays, Strings, Hash Tables, Stacks | ✅ Strong coverage |
-| **Intermediate** | Linked Lists, Binary Search, Bit Manipulation, Greedy, Sliding Window | 🔄 In Progress |
-| **Advanced** | Dynamic Programming, Backtracking, Graphs, Trees, Union Find | ⏳ Upcoming |
+| **Intermediate** | Linked Lists, Binary Search, Bit Manipulation, Greedy, Sliding Window, Trees | 🔄 In Progress |
+| **Advanced** | Dynamic Programming, Backtracking, Graphs, Union Find | ⏳ Upcoming |
 
 ---
 
