@@ -54,6 +54,7 @@ LeetCode-Journey/
 ├── Binary Search/
 ├── Bit Manipulation/
 ├── Dynamic Programming/
+├── Graphs/
 ├── Greedy/
 ├── Hash Tables/
 ├── Linked Lists/
@@ -63,7 +64,7 @@ LeetCode-Journey/
 ├── Sorting/
 ├── Stacks/
 ├── Strings/
-└── Trees/
+└── Tree/
 ```
 
 Each problem lives in its own folder:
@@ -78,25 +79,26 @@ Each problem lives in its own folder:
 
 ## Progress
 
-**Total problems recovered: 88** (all 88 with source code recovered ✅)
+**Total problems recovered: 96** (all 96 with source code recovered ✅)
 
 | Category | Count |
 |---|---|
 | Arrays | 31 |
-| Backtracking | 2 |
-| Binary Search | 3 |
-| Bit Manipulation | 3 |
-| Dynamic Programming | 2 |
-| Greedy | 2 |
-| Hash Tables | 8 |
+| Backtracking | 3 |
+| Binary Search | 4 |
+| Bit Manipulation | 4 |
+| Dynamic Programming | 3 |
+| Graphs | 1 |
+| Greedy | 3 |
+| Hash Tables | 9 |
 | Linked Lists | 2 |
 | Math | 4 |
 | Simulation | 2 |
 | Sliding Window | 8 |
-| Sorting | 2 |
+| Sorting | 3 |
 | Stacks | 2 |
 | Strings | 15 |
-| Trees | 2 |
+| Tree | 2 |
 
 ---
 
@@ -135,29 +137,37 @@ Each problem lives in its own folder:
 - [2529 — Maximum Count of Positive Integer and Negative Integer](Arrays/2529_Maximum_Count_of_Positive_Integer_and_Negative_Integer/README.md)
 - [2798 — Number of Employees Who Met the Target](Arrays/2798_Number_of_Employees_Who_Met_the_Target/README.md)
 
-### Backtracking (2)
+### Backtracking (3)
+- [022 — Generate Parentheses](Backtracking/022_Generate_Parentheses/README.md)
 - [046 — Permutations](Backtracking/046_Permutations/README.md)
 - [980 — Unique Paths III](Backtracking/980_Unique_Paths_III/README.md)
 
-### Binary Search (3)
+### Binary Search (4)
+- [004 — Median of Two Sorted Arrays](Binary%20Search/004_Median_of_Two_Sorted_Arrays/README.md)
 - [035 — Search Insert Position](Binary%20Search/035_Search_Insert_Position/README.md)
 - [069 — Sqrt(x)](Binary%20Search/069_Sqrt_x/README.md)
 - [704 — Binary Search](Binary%20Search/704_Binary_Search/README.md)
 
-### Bit Manipulation (3)
+### Bit Manipulation (4)
 - [136 — Single Number](Bit%20Manipulation/136_Single_Number/README.md)
 - [190 — Reverse Bits](Bit%20Manipulation/190_Reverse_Bits/README.md)
 - [191 — Number of 1 Bits](Bit%20Manipulation/191_Number_of_1_Bits/README.md)
+- [393 — UTF-8 Validation](Bit%20Manipulation/393_UTF_8_Validation/README.md)
 
-### Dynamic Programming (2)
+### Dynamic Programming (3)
 - [070 — Climbing Stairs](Dynamic%20Programming/070_Climbing_Stairs/README.md)
 - [3699 — Number of ZigZag Arrays I](Dynamic%20Programming/3699_Number_of_ZigZag_Arrays_I/README.md)
+- [3720 — Lexicographically Smallest Permutation Greater Than Target](Dynamic%20Programming/3720_Lexicographically_Smallest_Permutation_Greater_Than_Target/README.md)
 
-### Greedy (2)
+### Graphs (1)
+- [3619 — Count Islands With Total Value Divisible by K](Graphs/3619_Count_Islands_With_Total_Value_Divisible_by_K/README.md)
+
+### Greedy (3)
 - [455 — Assign Cookies](Greedy/455_Assign_Cookies/README.md)
 - [1833 — Maximum Ice Cream Bars](Greedy/1833_Maximum_Ice_Cream_Bars/README.md)
+- [3014 — Minimum Number of Pushes to Type Word I](Greedy/3014_Minimum_Number_of_Pushes_to_Type_Word_I/README.md)
 
-### Hash Tables (8)
+### Hash Tables (9)
 - [001 — Two Sum](Hash%20Tables/001_Two_Sum/README.md)
 - [202 — Happy Number](Hash%20Tables/202_Happy_Number/README.md)
 - [205 — Isomorphic Strings](Hash%20Tables/205_Isomorphic_Strings/README.md)
@@ -166,13 +176,14 @@ Each problem lives in its own folder:
 - [349 — Intersection of Two Arrays](Hash%20Tables/349_Intersection_of_Two_Arrays/README.md)
 - [389 — Find the Difference](Hash%20Tables/389_Find_the_Difference/README.md)
 - [1189 — Maximum Number of Balloons](Hash%20Tables/1189_Maximum_Number_of_Balloons/README.md)
+- [3731 — Find Missing Elements](Hash%20Tables/3731_Find_Missing_Elements/README.md)
 
 ### Linked Lists (2)
 - [021 — Merge Two Sorted Lists](Linked%20Lists/021_Merge_Two_Sorted_Lists/README.md)
 - [083 — Remove Duplicates from Sorted List](Linked%20Lists/083_Remove_Duplicates_from_Sorted_List/README.md)
 
 ### Math (4)
-- [050 — Pow(x, n)](Math/050_Pow_x_n/README.md)
+- [050 — Pow(x, n)](Math/050_Pow_X_n/README.md)
 - [412 — Fizz Buzz](Math/412_Fizz_Buzz/README.md)
 - [1291 — Sequential Digits](Math/1291_Sequential_Digits/README.md)
 - [3754 — Concatenate Non-Zero Digits and Multiply by Sum I](Math/3754_Concatenate_Non_Zero_Digits_and_Multiply_by_Sum_I/README.md)
@@ -191,7 +202,8 @@ Each problem lives in its own folder:
 - [1446 — Consecutive Characters](Sliding%20Window/1446_Consecutive_Characters/README.md)
 - [2461 — Maximum Sum of Distinct Subarrays With Length K](Sliding%20Window/2461_Maximum_Sum_of_Distinct_Subarrays_With_Length_K/README.md)
 
-### Sorting (2)
+### Sorting (3)
+- [056 — Merge Intervals](Sorting/056_Merge_Intervals/README.md)
 - [506 — Relative Ranks](Sorting/506_Relative_Ranks/README.md)
 - [1331 — Rank Transform of an Array](Sorting/1331_Rank_Transform_of_an_Array/README.md)
 
@@ -216,16 +228,16 @@ Each problem lives in its own folder:
 - [3612 — Process String with Special Operations I](Strings/3612_Process_String_with_Special_Operations_I/README.md)
 - [3614 — Process String with Special Operations II](Strings/3614_Process_String_with_Special_Operations_II/README.md)
 
-### Trees (2)
-- [094 — Binary Tree Inorder Traversal](Trees/094_Binary_Tree_Inorder_Traversal/README.md)
-- [257 — Binary Tree Paths](Trees/257_Binary_Tree_Paths/README.md)
+### Tree (2)
+- [094 — Binary Tree Inorder Traversal](Tree/094_Binary_Tree_Inorder_Traversal/README.md)
+- [257 — Binary Tree Paths](Tree/257_Binary_Tree_Paths/README.md)
 
 ---
 
 ## Topics Covered
 
 ### Data Structures
-`Arrays` · `Strings` · `Hash Tables` · `Linked Lists` · `Stacks` · `Trees`
+`Arrays` · `Strings` · `Hash Tables` · `Linked Lists` · `Stacks` · `Tree` · `Graphs`
 
 ### Algorithms
 `Binary Search` · `Two Pointers` · `Sliding Window` · `Backtracking` · `Greedy` · `Dynamic Programming` · `Bit Manipulation` · `Math` · `Simulation` · `Sorting`
@@ -238,7 +250,7 @@ Each problem lives in its own folder:
 |---|---|---|
 | **Foundation** | Arrays, Strings, Hash Tables, Stacks | ✅ Strong coverage |
 | **Intermediate** | Linked Lists, Binary Search, Bit Manipulation, Greedy, Sliding Window, Trees | 🔄 In Progress |
-| **Advanced** | Dynamic Programming, Backtracking, Graphs, Union Find | ⏳ Upcoming |
+| **Advanced** | Dynamic Programming, Backtracking, Graphs, Union Find | 🔄 In Progress |
 
 ---
 
